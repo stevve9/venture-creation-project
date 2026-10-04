@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"><style>*{box-sizing:border-box}body{margin:0;background:#FBF6EC;font-family:Nunito,system-ui,sans-serif;color:#221c14;-webkit-font-smoothing:antialiased}a{color:#6d3fd1;text-decoration:none}a:hover{color:#4a2b91}button{font-family:inherit}
+@keyframes sway{0%,100%{transform:translateY(0) rotate(-.8deg)}50%{transform:translateY(-9px) rotate(.8deg)}}
+@keyframes slideIn{from{transform:translateX(40px);opacity:.35}to{transform:translateX(0);opacity:1}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes faqIn{from{opacity:0;transform:translateY(-7px)}to{opacity:1;transform:none}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes pulseA{0%{transform:scale(1)}40%{transform:scale(1.32)}100%{transform:scale(1)}}
+@keyframes pulseB{0%{transform:scale(1)}40%{transform:scale(1.32)}100%{transform:scale(1)}}
+@keyframes pageA{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes pageB{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes gridA{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes gridB{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes reveal{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes quizA{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+@keyframes quizB{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}</style></helmet>
+
+<div style="min-height:100vh;display:flex;flex-direction:column;background:#FBF6EC">
+
+<header style="position:sticky;top:0;z-index:40;background:#FBF6EC;border-bottom:1.5px solid #e6dcc8">
+<div style="max-width:1140px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
+<button onClick="{{ goHome }}" style="background:none;border:none;padding:0;cursor:pointer;font-family:Fredoka,sans-serif;font-weight:600;font-size:23px;color:#221c14;letter-spacing:-.01em">slimu<span style="color:#8a5cf0">.</span></button>
+<nav style="display:flex;gap:2px;flex-wrap:wrap">
+<button onClick="{{ goKatalog }}" style="white-space:nowrap;background:none;border:none;cursor:pointer;font-size:14.5px;font-weight:700;color:#4a4132;padding:9px 9px;border-radius:999px" style-hover="background:#EDE3FF;color:#221c14">Katalog</button>
+<button onClick="{{ goKuis }}" style="white-space:nowrap;background:none;border:none;cursor:pointer;font-size:14.5px;font-weight:700;color:#4a4132;padding:9px 9px;border-radius:999px" style-hover="background:#EDE3FF;color:#221c14">Kuis tekstur</button>
+<button onClick="{{ goPerawatan }}" style="white-space:nowrap;background:none;border:none;cursor:pointer;font-size:14.5px;font-weight:700;color:#4a4132;padding:9px 9px;border-radius:999px" style-hover="background:#EDE3FF;color:#221c14">Cara merawat</button>
+<button onClick="{{ goTentang }}" style="white-space:nowrap;background:none;border:none;cursor:pointer;font-size:14.5px;font-weight:700;color:#4a4132;padding:9px 9px;border-radius:999px" style-hover="background:#EDE3FF;color:#221c14">Tentang</button>
+<button onClick="{{ goFaq }}" style="white-space:nowrap;background:none;border:none;cursor:pointer;font-size:14.5px;font-weight:700;color:#4a4132;padding:9px 9px;border-radius:999px" style-hover="background:#EDE3FF;color:#221c14">FAQ</button>
+<button onClick="{{ goKontak }}" style="white-space:nowrap;background:none;border:none;cursor:pointer;font-size:14.5px;font-weight:700;color:#4a4132;padding:9px 9px;border-radius:999px" style-hover="background:#EDE3FF;color:#221c14">Kontak</button>
+</nav>
+<div style="display:flex;align-items:center;gap:8px;flex:none">
+<button onClick="{{ toggleSfx }}" title="{{ sfxTitle }}" aria-label="{{ sfxTitle }}" style="{{ sfxStyle }}"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"></path><path d="{{ sfxWave }}"></path></svg></button>
+<button onClick="{{ openCart }}" style="flex:none;white-space:nowrap;cursor:pointer;background:#fff;border:2px solid #221c14;border-radius:999px;padding:9px 16px;font-size:13.5px;font-weight:800;color:#221c14;display:flex;align-items:center;gap:8px" style-hover="background:#EDE3FF">Keranjang<span style="{{ badgeStyle }}">{{ cartCount }}</span></button>
+<a href="{{ waPlain }}" target="_blank" rel="noopener" style="flex:none;white-space:nowrap;background:#221c14;color:#FBF6EC;font-size:13.5px;font-weight:800;padding:11px 17px;border-radius:999px">Chat WA</a>
+</div>
+</div>
+</header>
+
+<main style="flex:1"><div style="{{ pageAnim }}">
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<div>
+<section style="max-width:1140px;margin:0 auto;padding:38px 22px 46px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px;align-items:center">
+<div style="display:flex;flex-direction:column;gap:20px;min-width:0">
+<div style="align-self:flex-start;max-width:100%;line-height:1.4;white-space:nowrap;background:#EDE3FF;color:#4a2b91;font-size:12.5px;font-weight:800;padding:7px 14px;border-radius:999px;border:1.5px solid #221c14">Handmade · khusus pembelian di kampus</div>
+<h1 style="margin:0;font-family:Fredoka,sans-serif;font-weight:600;font-size:clamp(38px,5.4vw,62px);line-height:1.02;letter-spacing:-.02em;text-wrap:pretty">Slime yang bikin kamu gak mau berhenti.</h1>
+<p style="margin:0;font-size:16.5px;line-height:1.65;color:#4a4132;max-width:420px">Butter, cloud, clear, crunchy. Semua diaduk sendiri, dites dulu, baru diserahkan langsung di kampus.</p>
+<div style="display:flex;gap:12px;flex-wrap:wrap">
+<button onClick="{{ goKatalog }}" style="cursor:pointer;background:#B58CFF;color:#20143a;font-weight:800;font-size:15px;padding:15px 28px;border-radius:999px;border:2px solid #221c14" style-hover="background:#a273ff">Lihat katalog</button>
+<a href="{{ waPlain }}" target="_blank" rel="noopener" style="border:2px solid #221c14;color:#221c14;font-weight:800;font-size:15px;padding:14px 26px;border-radius:999px" style-hover="background:#EDE3FF">Tanya via WhatsApp</a>
+</div>
+</div>
+<div style="position:relative;min-width:0">
+<div style="aspect-ratio:1/1;border:2px solid #221c14;border-radius:48% 52% 44% 56%/52% 44% 56% 48%;background:repeating-linear-gradient(45deg,#f4ebff,#f4ebff 8px,#e6d5ff 8px,#e6d5ff 16px);display:flex;align-items:center;justify-content:center;animation:sway 11s ease-in-out infinite"><span style="white-space:nowrap;font:11px ui-monospace,Menlo,monospace;color:#3a3125;background:#fff;padding:6px 10px;border-radius:6px;border:1.5px solid #221c14">foto slime utama</span></div>
+<div style="position:absolute;bottom:8px;left:0;background:#fff;border:2px solid #221c14;border-radius:18px;padding:11px 16px;font-size:13px;font-weight:800;white-space:nowrap;line-height:1.35;transform:rotate(-3deg)">⭐ 4.9 · 2.100+ toples terjual</div>
+</div>
+</section>
+
+<div style="background:#221c14;color:#FBF6EC;padding:13px 0;overflow:hidden">
+<div style="display:flex;width:max-content;animation:marquee 30s linear infinite;font-family:Fredoka,sans-serif;font-weight:500;font-size:16px;letter-spacing:.02em">
+<span style="padding-right:40px;white-space:nowrap">TANPA ONGKIR ✦ AMBIL DI KAMPUS ✦ BONUS ACTIVATOR ✦ BISA CUSTOM AROMA ✦</span>
+<span style="padding-right:40px;white-space:nowrap">TANPA ONGKIR ✦ AMBIL DI KAMPUS ✦ BONUS ACTIVATOR ✦ BISA CUSTOM AROMA ✦</span>
+</div>
+</div>
+
+<section style="max-width:1140px;margin:0 auto;padding:34px 22px 12px;animation:reveal .85s cubic-bezier(.2,.7,.3,1) both;animation-timeline:view();animation-range:entry 0% cover 30%">
+<div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px">
+<h2 style="margin:0;font-family:Fredoka,sans-serif;font-weight:600;font-size:28px">Paling dicari minggu ini</h2>
+<button onClick="{{ goKatalog }}" style="background:none;border:none;cursor:pointer;font-size:14.5px;font-weight:800;color:#6d3fd1;padding:0">Semua produk →</button>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px">
+<sc-for list="{{ featured }}" as="p" hint-placeholder-count="4">
+<div style="background:#fff;border:2px solid #221c14;border-radius:24px;padding:12px;display:flex;flex-direction:column;gap:10px;transition:transform .3s cubic-bezier(.2,.7,.3,1),box-shadow .3s ease" style-hover="transform:translateY(-7px);box-shadow:0 10px 0 -2px rgba(34,28,20,.18)">
+<div style="position:relative">
+<button onClick="{{ p.open }}" style="cursor:pointer;padding:0;border:none;background:none;display:block;width:100%"><div style="aspect-ratio:1/1;border-radius:16px;background:{{ p.tile }}"></div></button>
+<span style="{{ p.badgeStyle }}">{{ p.badge }}</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:3px">
+<button onClick="{{ p.open }}" style="cursor:pointer;padding:0;border:none;background:none;text-align:left;font-family:Nunito,sans-serif;font-weight:800;font-size:15.5px;color:#221c14">{{ p.name }}</button>
+<span style="font-size:12.5px;font-weight:700;color:#6d3fd1">{{ p.cat }}</span>
+</div>
+<div style="margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:8px">
+<span style="font-size:15px;font-weight:700;color:#4a4132">{{ p.priceStr }}</span>
+<button onClick="{{ p.add }}" style="{{ p.addStyle }}">{{ p.addLabel }}</button>
+</div>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section style="max-width:1140px;margin:0 auto;padding:34px 22px 12px;animation:reveal .85s cubic-bezier(.2,.7,.3,1) both;animation-timeline:view();animation-range:entry 0% cover 30%">
+<h2 style="margin:0 0 6px;font-family:Fredoka,sans-serif;font-weight:600;font-size:28px">Cara pre-order</h2>
+<p style="margin:0 0 18px;font-size:15px;line-height:1.6;color:#4a4132;max-width:540px">Semua slime dibuat setelah kamu pesan, jadi yang sampai di tanganmu selalu baru diaduk.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px">
+<div style="background:#fff;border:2px solid #221c14;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:10px">
+<div style="width:40px;height:40px;border-radius:999px;border:2px solid #221c14;background:#EDE3FF;display:flex;align-items:center;justify-content:center;font-family:Fredoka,sans-serif;font-weight:600;font-size:19px">1</div>
+<div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:20px;line-height:1.2">Pilih slime</div>
+<p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a4132">Masukkan varian yang kamu mau ke keranjang.</p>
+</div>
+<div style="background:#fff;border:2px solid #221c14;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:10px">
+<div style="width:40px;height:40px;border-radius:999px;border:2px solid #221c14;background:#ffd8e8;display:flex;align-items:center;justify-content:center;font-family:Fredoka,sans-serif;font-weight:600;font-size:19px">2</div>
+<div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:20px;line-height:1.2">Isi nama</div>
+<p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a4132">Tekan kirim pre-order. Pesananmu otomatis tertulis di chat WhatsApp kami.</p>
+</div>
+<div style="background:#fff;border:2px solid #221c14;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:10px">
+<div style="width:40px;height:40px;border-radius:999px;border:2px solid #221c14;background:#FFD166;display:flex;align-items:center;justify-content:center;font-family:Fredoka,sans-serif;font-weight:600;font-size:19px">3</div>
+<div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:20px;line-height:1.2">Bayar lunas</div>
+<p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a4132">Admin membalas dengan detail pembayaran.</p>
+</div>
+<div style="background:#fff;border:2px solid #221c14;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:10px">
+<div style="width:40px;height:40px;border-radius:999px;border:2px solid #221c14;background:#cdf0de;display:flex;align-items:center;justify-content:center;font-family:Fredoka,sans-serif;font-weight:600;font-size:19px">4</div>
+<div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:20px;line-height:1.2">Dibuat & diambil</div>
+<p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a4132">Slime diaduk setelah pembayaran masuk, lalu siap diambil di {{ pickupSpot }} sekitar {{ poDaysLabel }} kemudian.</p>
+</div>
+</div>
+</section>
+
+<section style="max-width:1140px;margin:0 auto;padding:34px 22px 12px;animation:reveal .85s cubic-bezier(.2,.7,.3,1) both;animation-timeline:view();animation-range:entry 0% cover 30%">
+<div style="background:#fff;border:2px solid #221c14;border-radius:28px;padding:26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:26px;align-items:center">
+<div style="min-width:0">
+<div style="display:inline-block;background:#FFD166;border:1.5px solid #221c14;border-radius:999px;padding:6px 13px;font-size:12.5px;font-weight:800;margin-bottom:12px">Hemat Rp18.000</div>
+<h2 style="margin:0 0 8px;font-family:Fredoka,sans-serif;font-weight:600;font-size:30px;line-height:1.1">Paket Trio Bestseller</h2>
+<p style="margin:0 0 16px;font-size:15.5px;line-height:1.65;color:#4a4132">Tiga varian yang paling sering dipesan ulang: Butter Mangga, Cloud Taro, dan Crunchy Bubblegum.</p>
+<div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:16px">
+<span style="font-family:Fredoka,sans-serif;font-size:32px">Rp95.000</span>
+<span style="font-size:16px;font-weight:700;color:#8a7f68;text-decoration:line-through">Rp113.000</span>
+</div>
+<div style="display:flex;gap:12px;flex-wrap:wrap">
+<button onClick="{{ addBundle }}" style="cursor:pointer;background:#B58CFF;border:2px solid #221c14;color:#20143a;font-weight:800;font-size:15px;padding:14px 24px;border-radius:999px" style-hover="background:#a273ff">+ Ambil paketnya</button>
+<button onClick="{{ openBundle }}" style="cursor:pointer;background:#fff;border:2px solid #221c14;color:#221c14;font-weight:800;font-size:15px;padding:13px 22px;border-radius:999px">Lihat isi paket</button>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+<div style="aspect-ratio:2/3;border:2px solid #221c14;border-radius:20px;background:repeating-linear-gradient(45deg,#fff8ec,#fff8ec 8px,#ffe9c4 8px,#ffe9c4 16px)"></div>
+<div style="aspect-ratio:2/3;border:2px solid #221c14;border-radius:20px;background:repeating-linear-gradient(45deg,#f4ebff,#f4ebff 8px,#e6d5ff 8px,#e6d5ff 16px);transform:translateY(-10px)"></div>
+<div style="aspect-ratio:2/3;border:2px solid #221c14;border-radius:20px;background:repeating-linear-gradient(45deg,#ffeef5,#ffeef5 8px,#ffd8e8 8px,#ffd8e8 16px)"></div>
+</div>
+</div>
+</section>
+
+<section style="max-width:1140px;margin:0 auto;padding:34px 22px 12px;animation:reveal .85s cubic-bezier(.2,.7,.3,1) both;animation-timeline:view();animation-range:entry 0% cover 30%">
+<h2 style="margin:0 0 18px;font-family:Fredoka,sans-serif;font-weight:600;font-size:28px">Kata pembeli</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px">
+<sc-for list="{{ reviews }}" as="r" hint-placeholder-count="4">
+<div style="background:#fff;border:2px solid #221c14;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:12px">
+<div style="font-size:14px;letter-spacing:.08em;color:#c98a00">{{ r.stars }}</div>
+<p style="margin:0;font-size:15px;line-height:1.65;color:#3a3125">{{ r.text }}</p>
+<div style="margin-top:auto;display:flex;flex-direction:column;gap:2px">
+<span style="font-size:14px;font-weight:800">{{ r.name }}</span>
+<span style="font-size:13px;color:#6b6047">{{ r.meta }}</span>
+</div>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section style="max-width:1140px;margin:0 auto;padding:34px 22px 10px;animation:reveal .85s cubic-bezier(.2,.7,.3,1) both;animation-timeline:view();animation-range:entry 0% cover 30%">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px">
+<div style="background:#fff;border:2px solid #221c14;border-radius:24px;padding:20px"><div style="font-family:Fredoka,sans-serif;font-size:22px;margin-bottom:6px">Tekstur dites dulu</div><p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a4132">Tiap batch dicoba minimal 24 jam sebelum dijual. Kalau nggak enak dimainin, nggak dijual.</p></div>
+<div style="background:#fff;border:2px solid #221c14;border-radius:24px;padding:20px"><div style="font-family:Fredoka,sans-serif;font-size:22px;margin-bottom:6px">Aman di tangan</div><p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a4132">Bahan food-grade non-toxic, aktivator terukur. Tetap jangan dimakan, ya.</p></div>
+<div style="background:#fff;border:2px solid #221c14;border-radius:24px;padding:20px"><div style="font-family:Fredoka,sans-serif;font-size:22px;margin-bottom:6px">Pre-order, dibuat baru</div><p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a4132">Slime diaduk setelah kamu pesan dan bayar, lalu siap diambil di kampus sekitar seminggu kemudian. Konfirmasi dan info pembayaran lewat WhatsApp.</p></div>
+</div>
+</section>
+
+<section style="max-width:1140px;margin:0 auto;padding:34px 22px 46px;animation:reveal .85s cubic-bezier(.2,.7,.3,1) both;animation-timeline:view();animation-range:entry 0% cover 30%">
+<div style="background:#EDE3FF;border:2px solid #221c14;border-radius:28px;padding:30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;align-items:center">
+<div>
+<h2 style="margin:0 0 8px;font-family:Fredoka,sans-serif;font-weight:600;font-size:30px">Bingung pilih yang mana?</h2>
+<p style="margin:0;font-size:15.5px;line-height:1.6;color:#3a3125">Jawab tiga pertanyaan singkat, nanti kami tunjukkan tekstur yang paling cocok buat kamu. Atau chat aja kalau mau langsung ditanya.</p>
+</div>
+<div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end">
+<button onClick="{{ goKuis }}" style="cursor:pointer;background:#221c14;border:2px solid #221c14;color:#FBF6EC;font-weight:800;font-size:15px;padding:15px 26px;border-radius:999px">Mulai kuis tekstur</button>
+<a href="{{ waPlain }}" target="_blank" rel="noopener" style="background:#fff;border:2px solid #221c14;color:#221c14;font-weight:800;font-size:15px;padding:14px 24px;border-radius:999px">Tanya di WhatsApp</a>
+</div>
+</div>
+</section>
+</div>
+</sc-if>
+
+<sc-if value="{{ isKatalog }}" hint-placeholder-val="{{ false }}">
+<section style="max-width:1140px;margin:0 auto;padding:34px 22px 50px">
+<h1 style="margin:0 0 8px;font-family:Fredoka,sans-serif;font-weight:600;font-size:clamp(30px,4vw,42px)">Katalog</h1>
+<p style="margin:0 0 20px;font-size:15.5px;color:#4a4132">{{ resultLabel }}</p>
+<div style="display:flex;gap:10px;align-items:center;background:#fff;border:2px solid #221c14;border-radius:999px;padding:11px 18px;max-width:420px;margin-bottom:16px">
+<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#6b6047" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="6.4"></circle><path d="M15.8 15.8 20 20"></path></svg>
+<input type="search" value="{{ q }}" onInput="{{ onSearch }}" placeholder="Cari nama, aroma, atau tekstur" style="flex:1;min-width:0;border:none;outline:none;background:none;font-family:Nunito,sans-serif;font-size:14.5px;font-weight:600;color:#221c14">
+<sc-if value="{{ hasQuery }}" hint-placeholder-val="{{ false }}">
+<button onClick="{{ clearSearch }}" aria-label="Hapus pencarian" style="cursor:pointer;flex:none;border:none;background:#EDE3FF;border-radius:999px;width:24px;height:24px;font-size:13px;font-weight:800;color:#4a2b91;padding:0">✕</button>
+</sc-if>
+</div>
+<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:22px">
+<sc-for list="{{ cats }}" as="c" hint-placeholder-count="6">
+<button onClick="{{ c.pick }}" style="{{ c.style }}">{{ c.label }}</button>
+</sc-for>
+<button onClick="{{ toggleMurah }}" style="{{ murahStyle }}">Di bawah Rp35.000</button>
+</div>
+<div style="{{ gridAnim }}">
+<sc-for list="{{ visible }}" as="p" hint-placeholder-count="8">
+<div style="background:#fff;border:2px solid #221c14;border-radius:24px;padding:12px;display:flex;flex-direction:column;gap:10px;transition:transform .3s cubic-bezier(.2,.7,.3,1),box-shadow .3s ease" style-hover="transform:translateY(-7px);box-shadow:0 10px 0 -2px rgba(34,28,20,.18)">
+<div style="position:relative">
+<button onClick="{{ p.open }}" style="cursor:pointer;padding:0;border:none;background:none;display:block;width:100%"><div style="aspect-ratio:1/1;border-radius:16px;background:{{ p.tile }}"></div></button>
+<span style="{{ p.badgeStyle }}">{{ p.badge }}</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:3px">
+<button onClick="{{ p.open }}" style="cursor:pointer;padding:0;border:none;background:none;text-align:left;font-family:Nunito,sans-serif;font-weight:800;font-size:15.5px;color:#221c14">{{ p.name }}</button>
+<span style="font-size:12.5px;font-weight:700;color:#6d3fd1">{{ p.cat }}</span>
+</div>
+<div style="margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:8px">
+<span style="font-size:15px;font-weight:700;color:#4a4132">{{ p.priceStr }}</span>
+<button onClick="{{ p.add }}" style="{{ p.addStyle }}">{{ p.addLabel }}</button>
+</div>
+</div>
+</sc-for>
+</div>
+<sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+<div style="background:#fff;border:2px solid #221c14;border-radius:24px;padding:30px;text-align:center">
+<div style="font-family:Fredoka,sans-serif;font-size:22px;margin-bottom:6px">Belum ada yang cocok</div>
+<p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#4a4132">Coba kata kunci lain, atau tanya langsung — kadang ada varian yang belum masuk katalog.</p>
+<a href="{{ waPlain }}" target="_blank" rel="noopener" style="display:inline-block;background:#221c14;color:#FBF6EC;font-weight:800;font-size:14.5px;padding:13px 22px;border-radius:999px">Tanya di WhatsApp</a>
+</div>
+</sc-if>
+</section>
+</sc-if>
+
+<sc-if value="{{ isKuis }}" hint-placeholder-val="{{ false }}">
+<section style="max-width:760px;margin:0 auto;padding:34px 22px 50px">
+<h1 style="margin:0 0 10px;font-family:Fredoka,sans-serif;font-weight:600;font-size:clamp(28px,3.8vw,40px);line-height:1.08">Tekstur mana yang cocok buat kamu?</h1>
+<p style="margin:0 0 24px;font-size:16px;line-height:1.65;color:#4a4132">Tiga pertanyaan, tidak ada jawaban salah.</p>
+
+<sc-if value="{{ quizActive }}" hint-placeholder-val="{{ true }}">
+<div>
+<div style="height:8px;background:#EDE3FF;border:1.5px solid #221c14;border-radius:999px;overflow:hidden;margin-bottom:10px">
+<div style="{{ quizBarStyle }}"></div>
+</div>
+<div style="font-size:13px;font-weight:800;color:#6d3fd1;margin-bottom:18px">{{ quizStepLabel }}</div>
+<div style="{{ quizAnim }}">
+<div style="font-family:Fredoka,sans-serif;font-size:26px;line-height:1.2;margin-bottom:18px">{{ quizQ }}</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<sc-for list="{{ quizOpts }}" as="o" hint-placeholder-count="4">
+<button onClick="{{ o.pick }}" style="cursor:pointer;text-align:left;background:#fff;border:2px solid #221c14;border-radius:22px;padding:18px 20px;font-family:Nunito,sans-serif;font-size:16px;font-weight:700;color:#221c14;transition:transform .3s cubic-bezier(.2,.7,.3,1),background .3s ease" style-hover="background:#EDE3FF;transform:translateX(5px)">{{ o.label }}</button>
+</sc-for>
+</div>
+</div>
+<sc-if value="{{ quizStarted }}" hint-placeholder-val="{{ false }}">
+<button onClick="{{ quizReset }}" style="margin-top:20px;cursor:pointer;background:none;border:none;padding:0;font-size:14px;font-weight:800;color:#6d3fd1">Mulai ulang</button>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ quizDone }}" hint-placeholder-val="{{ false }}">
+<div style="animation:faqIn .4s ease">
+<div style="background:#EDE3FF;border:2px solid #221c14;border-radius:28px;padding:26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:24px;align-items:center">
+<div style="min-width:0">
+<div style="font-size:13px;font-weight:800;color:#4a2b91;margin-bottom:8px">Cocoknya buat kamu</div>
+<h2 style="margin:0 0 6px;font-family:Fredoka,sans-serif;font-weight:600;font-size:32px;line-height:1.1">{{ quizResultName }}</h2>
+<div style="font-size:15px;font-weight:800;color:#4a2b91;margin-bottom:12px">{{ quizResultCat }}</div>
+<p style="margin:0 0 18px;font-size:15.5px;line-height:1.65;color:#3a3125">{{ quizResultWhy }}</p>
+<div style="display:flex;gap:12px;flex-wrap:wrap">
+<button onClick="{{ quizResultOpen }}" style="cursor:pointer;background:#221c14;border:2px solid #221c14;color:#FBF6EC;font-weight:800;font-size:15px;padding:15px 24px;border-radius:999px">Lihat produknya</button>
+<button onClick="{{ quizResultAdd }}" style="cursor:pointer;background:#B58CFF;border:2px solid #221c14;color:#20143a;font-weight:800;font-size:15px;padding:15px 24px;border-radius:999px">+ Keranjang · {{ quizResultPrice }}</button>
+</div>
+</div>
+<div style="aspect-ratio:1/1;border:2px solid #221c14;border-radius:26px;background:{{ quizResultTile }}"></div>
+</div>
+<button onClick="{{ quizReset }}" style="margin-top:20px;cursor:pointer;background:none;border:none;padding:0;font-size:14px;font-weight:800;color:#6d3fd1">Ulangi kuis</button>
+</div>
+</sc-if>
+</section>
+</sc-if>
+
+<sc-if value="{{ isProduk }}" hint-placeholder-val="{{ false }}">
+<section style="max-width:1140px;margin:0 auto;padding:26px 22px 50px">
+<button onClick="{{ goKatalog }}" style="background:none;border:none;cursor:pointer;font-size:14px;font-weight:800;color:#6d3fd1;padding:0;margin-bottom:18px">← Kembali ke katalog</button>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:34px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:12px;min-width:0">
+<div style="aspect-ratio:1/1;border:2px solid #221c14;border-radius:28px;background:{{ p.tile }};display:flex;align-items:center;justify-content:center"><span style="font:11px ui-monospace,Menlo,monospace;color:#3a3125;background:#fff;padding:6px 10px;border-radius:6px;border:1.5px solid #221c14">foto produk</span></div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+<div style="aspect-ratio:1/1;border:2px solid #221c14;border-radius:18px;background:{{ p.tile }}"></div>
+<div style="aspect-ratio:1/1;border:2px solid #221c14;border-radius:18px;background:repeating-linear-gradient(45deg,#f7f2e6,#f7f2e6 8px,#ece2cd 8px,#ece2cd 16px)"></div>
+<div style="aspect-ratio:1/1;border:2px solid #221c14;border-radius:18px;background:repeating-linear-gradient(45deg,#f4ebff,#f4ebff 8px,#e6d5ff 8px,#e6d5ff 16px)"></div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px;min-width:0">
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<span style="background:#EDE3FF;border:1.5px solid #221c14;color:#4a2b91;font-size:12.5px;font-weight:800;padding:6px 13px;border-radius:999px">{{ p.cat }}</span>
+<span style="{{ p.stockPillStyle }}">{{ p.stockPill }}</span>
+</div>
+<h1 style="margin:0;font-family:Fredoka,sans-serif;font-weight:600;font-size:clamp(30px,4vw,44px);line-height:1.05">{{ p.name }}</h1>
+<div style="font-family:Fredoka,sans-serif;font-size:30px;color:#221c14">{{ p.priceStr }}</div>
+<p style="margin:0;font-size:16px;line-height:1.7;color:#4a4132;max-width:460px">{{ p.desc }}</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px">
+<div style="background:#fff;border:2px solid #221c14;border-radius:18px;padding:13px 15px"><div style="font-size:11.5px;font-weight:800;color:#6d3fd1;text-transform:uppercase;letter-spacing:.06em">Aroma</div><div style="font-size:15px;font-weight:700;margin-top:3px">{{ p.aroma }}</div></div>
+<div style="background:#fff;border:2px solid #221c14;border-radius:18px;padding:13px 15px"><div style="font-size:11.5px;font-weight:800;color:#6d3fd1;text-transform:uppercase;letter-spacing:.06em">Tekstur</div><div style="font-size:15px;font-weight:700;margin-top:3px">{{ p.tekstur }}</div></div>
+<div style="background:#fff;border:2px solid #221c14;border-radius:18px;padding:13px 15px"><div style="font-size:11.5px;font-weight:800;color:#6d3fd1;text-transform:uppercase;letter-spacing:.06em">Ukuran</div><div style="font-size:15px;font-weight:700;margin-top:3px">{{ p.ukuran }}</div></div>
+</div>
+<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">
+<button onClick="{{ p.add }}" style="{{ p.addBigStyle }}">{{ p.addBigLabel }}</button>
+<a href="{{ p.waHref }}" target="_blank" rel="noopener" style="border:2px solid #221c14;color:#221c14;font-weight:800;font-size:15px;padding:14px 26px;border-radius:999px" style-hover="background:#EDE3FF">Tanya stok di WA</a>
+</div>
+<p style="margin:0;font-size:13.5px;color:#6b6047;line-height:1.6">Diambil langsung di kampus, tanpa ongkir. Konfirmasi dan pembayaran lewat WhatsApp. <button onClick="{{ goKirim }}" style="cursor:pointer;background:none;border:none;padding:0;font-family:Nunito,sans-serif;font-size:13.5px;font-weight:800;color:#6d3fd1">Lihat info pengambilan</button></p>
+</div>
+</div>
+<sc-if value="{{ showSticky }}" hint-placeholder-val="{{ false }}">
+<div>
+<div style="height:96px"></div>
+<div style="position:fixed;bottom:0;left:0;right:0;z-index:50;background:#FBF6EC;border-top:2px solid #221c14;padding:12px 16px;display:flex;align-items:center;gap:12px;box-shadow:0 -6px 18px rgba(34,28,20,.1)">
+<div style="flex:1;min-width:0">
+<div style="font-size:13px;font-weight:700;color:#6b6047;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ p.name }}</div>
+<div style="font-family:Fredoka,sans-serif;font-size:22px;line-height:1.1">{{ p.priceStr }}</div>
+</div>
+<a href="{{ p.waHref }}" target="_blank" rel="noopener" style="flex:none;border:2px solid #221c14;color:#221c14;font-weight:800;font-size:14px;padding:13px 16px;border-radius:999px">WA</a>
+<button onClick="{{ p.add }}" style="{{ p.addStickyStyle }}">{{ p.addStickyLabel }}</button>
+</div>
+</div>
+</sc-if>
+</section>
+</sc-if>
+
+<sc-if value="{{ isPerawatan }}" hint-placeholder-val="{{ false }}">
+<section style="max-width:820px;margin:0 auto;padding:34px 22px 50px">
+<h1 style="margin:0 0 10px;font-family:Fredoka,sans-serif;font-weight:600;font-size:clamp(30px,4vw,42px)">Cara merawat slime</h1>
+<p style="margin:0 0 26px;font-size:16px;line-height:1.65;color:#4a4132;max-width:560px">Slime handmade umurnya bisa berbulan-bulan kalau diperlakukan benar. Lima hal ini yang paling sering menyelamatkan.</p>
+<div style="display:flex;flex-direction:column;gap:14px">
+<sc-for list="{{ tips }}" as="t" hint-placeholder-count="5">
+<div style="background:#fff;border:2px solid #221c14;border-radius:22px;padding:20px;display:flex;gap:16px;align-items:flex-start">
+<div style="flex:none;width:38px;height:38px;border-radius:999px;background:#B58CFF;border:2px solid #221c14;display:flex;align-items:center;justify-content:center;font-family:Fredoka,sans-serif;font-weight:600;font-size:18px;color:#20143a">{{ t.no }}</div>
+<div style="min-width:0"><div style="font-family:Fredoka,sans-serif;font-size:21px;margin-bottom:4px">{{ t.title }}</div><p style="margin:0;font-size:15px;line-height:1.65;color:#4a4132">{{ t.body }}</p></div>
+</div>
+</sc-for>
+</div>
+<div style="margin-top:26px;background:#EDE3FF;border:2px solid #221c14;border-radius:22px;padding:20px;font-size:15px;line-height:1.65;color:#3a3125">Slime mengeras atau kekeringan? Kirim fotonya ke WhatsApp kami, biasanya masih bisa diselamatkan dengan activator atau sedikit lotion.</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isKirim }}" hint-placeholder-val="{{ false }}">
+<section style="max-width:820px;margin:0 auto;padding:34px 22px 50px">
+<h1 style="margin:0 0 10px;font-family:Fredoka,sans-serif;font-weight:600;font-size:clamp(30px,4vw,42px)">Pengambilan & garansi</h1>
+<p style="margin:0 0 26px;font-size:16px;line-height:1.65;color:#4a4132;max-width:580px">Semua yang perlu kamu tahu sebelum pesan. Kalau ada yang belum terjawab di sini, tanyakan saja di WhatsApp.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-bottom:26px">
+<div style="background:#fff;border:2px solid #221c14;border-radius:22px;padding:20px"><div style="font-family:Fredoka,sans-serif;font-size:21px;margin-bottom:6px">Jadwal ambil</div><p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a4132">Slime siap sekitar {{ poDaysLabel }} setelah pembayaran lunas. Admin mengabari lewat WhatsApp begitu pesananmu bisa diambil.</p></div>
+<div style="background:#fff;border:2px solid #221c14;border-radius:22px;padding:20px"><div style="font-family:Fredoka,sans-serif;font-size:21px;margin-bottom:6px">Titik ambil</div><p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a4132">{{ pickupSpot }}. Website ini khusus pembelian di lingkungan kampus, jadi tidak ada pengiriman ke luar kota.</p></div>
+<div style="background:#fff;border:2px solid #221c14;border-radius:22px;padding:20px"><div style="font-family:Fredoka,sans-serif;font-size:21px;margin-bottom:6px">Tanpa ongkir</div><p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a4132">Karena diambil langsung, harga di keranjang adalah harga yang kamu bayar.</p></div>
+<div style="background:#fff;border:2px solid #221c14;border-radius:22px;padding:20px"><div style="font-family:Fredoka,sans-serif;font-size:21px;margin-bottom:6px">Pengemasan</div><p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a4132">Tutup toples disegel, dibungkus dua lapis bubble wrap, lalu dus tebal. Setiap pesanan disertai activator kecil dan kartu perawatan.</p></div>
+</div>
+<div style="background:#EDE3FF;border:2px solid #221c14;border-radius:26px;padding:26px">
+<h2 style="margin:0 0 14px;font-family:Fredoka,sans-serif;font-weight:600;font-size:28px">Garansi bocor & rusak</h2>
+<div style="display:flex;flex-direction:column;gap:14px">
+<sc-for list="{{ garansi }}" as="g" hint-placeholder-count="3">
+<div style="display:flex;gap:14px;align-items:flex-start">
+<div style="flex:none;width:34px;height:34px;border-radius:999px;background:#fff;border:2px solid #221c14;display:flex;align-items:center;justify-content:center;font-family:Fredoka,sans-serif;font-weight:600;font-size:16px">{{ g.no }}</div>
+<div style="min-width:0"><div style="font-size:15.5px;font-weight:800;margin-bottom:3px">{{ g.title }}</div><p style="margin:0;font-size:15px;line-height:1.65;color:#3a3125">{{ g.body }}</p></div>
+</div>
+</sc-for>
+</div>
+<p style="margin:18px 0 0;font-size:14px;line-height:1.6;color:#4a3a6b">Garansi tidak berlaku untuk slime yang kering karena lupa ditutup, tercampur bahan lain, atau dilaporkan lebih dari 1×24 jam setelah paket diterima.</p>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isTentang }}" hint-placeholder-val="{{ false }}">
+<section style="max-width:1000px;margin:0 auto;padding:34px 22px 50px">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:34px;align-items:center">
+<div>
+<h1 style="margin:0 0 14px;font-family:Fredoka,sans-serif;font-weight:600;font-size:clamp(30px,4vw,44px);line-height:1.05">Dimulai dari satu toples di meja belajar.</h1>
+<p style="margin:0 0 14px;font-size:16px;line-height:1.7;color:#4a4132">Slimu dibuat sejak 2023 oleh dua orang yang awalnya cuma iseng bikin slime buat teman sekelas. Pesanan pertama datang dari grup WhatsApp sekolah, dan sampai sekarang cara ordernya tetap sama: ngobrol dulu, baru dibuat.</p>
+<p style="margin:0;font-size:16px;line-height:1.7;color:#4a4132">Semua produk diaduk manual dalam batch kecil. Kalau tekstur satu batch meleset, batch itu tidak dijual. Itu alasan stok kami sering habis, dan alasan pembeli balik lagi.</p>
+</div>
+<div style="aspect-ratio:4/5;border:2px solid #221c14;border-radius:28px;background:repeating-linear-gradient(45deg,#f7f2e6,#f7f2e6 8px,#ece2cd 8px,#ece2cd 16px);display:flex;align-items:center;justify-content:center"><span style="font:11px ui-monospace,Menlo,monospace;color:#3a3125;background:#fff;padding:6px 10px;border-radius:6px;border:1.5px solid #221c14">foto proses pembuatan</span></div>
+</div>
+<div style="margin-top:34px;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px">
+<div style="background:#fff;border:2px solid #221c14;border-radius:22px;padding:18px"><div style="font-family:Fredoka,sans-serif;font-size:30px">2.100+</div><div style="font-size:14px;font-weight:700;color:#4a4132">toples terjual</div></div>
+<div style="background:#fff;border:2px solid #221c14;border-radius:22px;padding:18px"><div style="font-family:Fredoka,sans-serif;font-size:30px">4.9</div><div style="font-size:14px;font-weight:700;color:#4a4132">rata-rata ulasan</div></div>
+<div style="background:#fff;border:2px solid #221c14;border-radius:22px;padding:18px"><div style="font-family:Fredoka,sans-serif;font-size:30px">16</div><div style="font-size:14px;font-weight:700;color:#4a4132">varian aktif</div></div>
+<div style="background:#fff;border:2px solid #221c14;border-radius:22px;padding:18px"><div style="font-family:Fredoka,sans-serif;font-size:30px">0</div><div style="font-size:14px;font-weight:700;color:#4a4132">ongkir, ambil di kampus</div></div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isFaq }}" hint-placeholder-val="{{ false }}">
+<section style="max-width:820px;margin:0 auto;padding:34px 22px 50px">
+<h1 style="margin:0 0 22px;font-family:Fredoka,sans-serif;font-weight:600;font-size:clamp(30px,4vw,42px)">Pertanyaan yang sering masuk</h1>
+<div style="display:flex;flex-direction:column;gap:12px">
+<sc-for list="{{ faqs }}" as="f" hint-placeholder-count="6">
+<div style="background:#fff;border:2px solid #221c14;border-radius:22px;overflow:hidden">
+<button onClick="{{ f.toggle }}" style="width:100%;cursor:pointer;background:none;border:none;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px;text-align:left;font-family:Nunito,sans-serif;font-size:16.5px;font-weight:800;color:#221c14">{{ f.q }}<span style="flex:none;font-family:Fredoka,sans-serif;font-size:22px;color:#6d3fd1">{{ f.sign }}</span></button>
+<sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
+<p style="margin:0;padding:0 20px 20px;font-size:15.5px;line-height:1.7;color:#4a4132;animation:faqIn .34s ease">{{ f.a }}</p>
+</sc-if>
+</div>
+</sc-for>
+</div>
+<div style="margin-top:20px;font-size:15px;color:#4a4132">Detail lengkap soal pengambilan dan klaim ada di <button onClick="{{ goKirim }}" style="cursor:pointer;background:none;border:none;padding:0;font-family:Nunito,sans-serif;font-size:15px;font-weight:800;color:#6d3fd1">Pengambilan & garansi</button>.</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isKontak }}" hint-placeholder-val="{{ false }}">
+<section style="max-width:900px;margin:0 auto;padding:34px 22px 50px">
+<div style="background:#EDE3FF;border:2px solid #221c14;border-radius:28px;padding:32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:28px">
+<div>
+<h1 style="margin:0 0 12px;font-family:Fredoka,sans-serif;font-weight:600;font-size:clamp(28px,3.6vw,40px);line-height:1.06">Pre-order lewat keranjang, konfirmasi di WhatsApp.</h1>
+<p style="margin:0 0 18px;font-size:16px;line-height:1.7;color:#3a3125">Isi keranjang dulu di katalog, tulis nama, lalu tekan kirim pre-order. Daftar produk, jumlah, dan totalnya otomatis tertulis di chat. Admin membalas dengan detail pembayaran; slime dibuat setelah pembayaran lunas.</p>
+<a href="{{ waPlain }}" target="_blank" rel="noopener" style="display:inline-block;background:#221c14;color:#FBF6EC;font-weight:800;font-size:15px;padding:15px 26px;border-radius:999px">Buka chat WhatsApp</a>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div style="background:#fff;border:2px solid #221c14;border-radius:18px;padding:16px"><div style="font-size:11.5px;font-weight:800;color:#6d3fd1;text-transform:uppercase;letter-spacing:.06em">WhatsApp</div><div style="font-size:16px;font-weight:800;margin-top:3px">{{ waDisplay }}</div></div>
+<div style="background:#fff;border:2px solid #221c14;border-radius:18px;padding:16px"><div style="font-size:11.5px;font-weight:800;color:#6d3fd1;text-transform:uppercase;letter-spacing:.06em">Jam balas</div><div style="font-size:16px;font-weight:800;margin-top:3px">09.00–21.00 WIB</div></div>
+<div style="background:#fff;border:2px solid #221c14;border-radius:18px;padding:16px"><div style="font-size:11.5px;font-weight:800;color:#6d3fd1;text-transform:uppercase;letter-spacing:.06em">Instagram</div><div style="font-size:16px;font-weight:800;margin-top:3px">@slimu.id</div></div>
+<div style="background:#fff;border:2px solid #221c14;border-radius:18px;padding:16px"><div style="font-size:11.5px;font-weight:800;color:#6d3fd1;text-transform:uppercase;letter-spacing:.06em">Pengambilan</div><div style="font-size:16px;font-weight:800;margin-top:3px">Di kampus · tanpa ongkir</div></div>
+</div>
+</div>
+</section>
+</sc-if>
+
+</div>
+</main>
+
+<footer style="border-top:1.5px solid #e6dcc8;margin-top:10px">
+<div style="max-width:1140px;margin:0 auto;padding:26px 22px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;align-items:center">
+<div style="font-family:Fredoka,sans-serif;font-size:20px">slimu<span style="color:#8a5cf0">.</span></div>
+<div style="display:flex;gap:16px;flex-wrap:wrap;font-size:13.5px;font-weight:700">
+<button onClick="{{ goKirim }}" style="cursor:pointer;background:none;border:none;padding:0;font-family:Nunito,sans-serif;font-size:13.5px;font-weight:700;color:#4a4132">Pengambilan & garansi</button>
+<button onClick="{{ goPerawatan }}" style="cursor:pointer;background:none;border:none;padding:0;font-family:Nunito,sans-serif;font-size:13.5px;font-weight:700;color:#4a4132">Cara merawat</button>
+<button onClick="{{ goFaq }}" style="cursor:pointer;background:none;border:none;padding:0;font-family:Nunito,sans-serif;font-size:13.5px;font-weight:700;color:#4a4132">FAQ</button>
+</div>
+<div style="display:flex;gap:16px;font-size:13.5px;font-weight:700;color:#4a4132"><span>@slimu.id</span><span>{{ waDisplay }}</span></div>
+</div>
+<div style="max-width:1140px;margin:0 auto;padding:0 22px 26px;font-size:13px;color:#6b6047">© 2026 Slimu · Bandung, Indonesia</div>
+</footer>
+
+<sc-if value="{{ cartOpen }}" hint-placeholder-val="{{ false }}">
+<div style="position:fixed;inset:0;z-index:60;display:flex;justify-content:flex-end">
+<button onClick="{{ closeCart }}" style="position:absolute;inset:0;border:none;padding:0;cursor:pointer;background:rgba(34,28,20,.42);animation:fadeIn .34s ease"></button>
+<aside style="position:relative;width:min(420px,100%);height:100%;background:#FBF6EC;border-left:2px solid #221c14;display:flex;flex-direction:column;animation:slideIn .42s cubic-bezier(.2,.7,.3,1)">
+<div style="padding:20px 22px;border-bottom:1.5px solid #e6dcc8;display:flex;justify-content:space-between;align-items:center">
+<div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:23px">Keranjang</div>
+<button onClick="{{ closeCart }}" style="cursor:pointer;background:none;border:2px solid #221c14;border-radius:999px;width:34px;height:34px;font-size:16px;font-weight:800;color:#221c14">✕</button>
+</div>
+<div style="flex:1;overflow:auto;padding:18px 22px;display:flex;flex-direction:column;gap:14px">
+<sc-if value="{{ cartEmpty }}" hint-placeholder-val="{{ false }}">
+<div style="text-align:center;padding:40px 10px;color:#6b6047;font-size:15px;line-height:1.6">Keranjang masih kosong.<br>Pilih dulu di katalog, ya.</div>
+</sc-if>
+<sc-for list="{{ lines }}" as="l" hint-placeholder-count="0">
+<div style="background:#fff;border:2px solid #221c14;border-radius:20px;padding:12px;display:flex;gap:12px;align-items:center">
+<div style="flex:none;width:58px;height:58px;border-radius:14px;border:1.5px solid #221c14;background:{{ l.tile }}"></div>
+<div style="flex:1;min-width:0"><div style="font-weight:800;font-size:14.5px;line-height:1.3">{{ l.name }}</div><div style="font-size:13.5px;color:#4a4132;margin-top:2px">{{ l.lineStr }}</div></div>
+<div style="flex:none;display:flex;align-items:center;gap:8px">
+<button onClick="{{ l.dec }}" style="cursor:pointer;width:30px;height:30px;border-radius:999px;border:1.5px solid #221c14;background:#fff;font-size:16px;font-weight:800">−</button>
+<span style="min-width:16px;text-align:center;font-weight:800;font-size:15px">{{ l.qty }}</span>
+<button onClick="{{ l.inc }}" style="cursor:pointer;width:30px;height:30px;border-radius:999px;border:1.5px solid #221c14;background:#EDE3FF;font-size:16px;font-weight:800">+</button>
+<button onClick="{{ l.remove }}" aria-label="Hapus dari keranjang" title="Hapus" style="cursor:pointer;width:30px;height:30px;border-radius:999px;border:1.5px solid #221c14;background:#fff;display:flex;align-items:center;justify-content:center;padding:0;transition:background .3s ease" style-hover="background:#ffdcec">
+<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#221c14" stroke-width="2.1" stroke-linecap="round"><path d="M4 7h16M9.5 7V4.6h5V7M6.5 7l1 12.4h9l1-12.4M10.4 10.6v6M13.6 10.6v6"></path></svg>
+</button>
+</div>
+</div>
+</sc-for>
+</div>
+<sc-if value="{{ undoOpen }}" hint-placeholder-val="{{ false }}">
+<div style="margin:0 22px 4px;background:#221c14;color:#FBF6EC;border-radius:16px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;animation:faqIn .34s ease">
+<span style="font-size:13.5px;font-weight:700;line-height:1.35">{{ undoLabel }}</span>
+<button onClick="{{ undo }}" style="flex:none;cursor:pointer;background:#B58CFF;border:none;color:#20143a;font-size:13px;font-weight:800;padding:8px 14px;border-radius:999px">Batalkan</button>
+</div>
+</sc-if>
+<div style="padding:18px 22px 22px;border-top:1.5px solid #e6dcc8;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:15px;font-weight:700;color:#4a4132">Total ({{ cartCount }} item)</span><span style="font-family:Fredoka,sans-serif;font-size:26px">{{ totalStr }}</span></div>
+<div style="display:flex;flex-direction:column;gap:9px">
+<label style="display:flex;flex-direction:column;gap:5px;font-size:12.5px;font-weight:800;color:#3a3125">Nama
+<input value="{{ poName }}" onChange="{{ setPoName }}" placeholder="Nama kamu" autoComplete="name" style="width:100%;box-sizing:border-box;background:#fff;border:2px solid #221c14;border-radius:14px;padding:12px 14px;font-family:Nunito,sans-serif;font-size:15px;font-weight:700;color:#221c14;outline:none" style-focus="border-color:#8a5cf0;box-shadow:0 0 0 3px #EDE3FF"></input></label>
+</div>
+<p style="margin:0;font-size:13px;line-height:1.55;color:#6b6047">Pre-order dibayar lunas di awal, tanpa ongkir. Slime siap diambil di {{ pickupSpot }} sekitar <b style="color:#221c14">{{ estDate }}</b>.</p>
+<sc-if value="{{ poValid }}" hint-placeholder-val="{{ false }}">
+<a href="{{ waOrder }}" onClick="{{ sendPo }}" target="_blank" rel="noopener" style="text-align:center;background:#B58CFF;border:2px solid #221c14;color:#20143a;font-weight:800;font-size:15.5px;padding:15px 20px;border-radius:999px" style-hover="background:#a273ff">Kirim pre-order</a>
+</sc-if>
+<sc-if value="{{ poInvalid }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:6px">
+<span style="text-align:center;background:#f2ece0;border:2px solid #b3a58a;color:#6b6047;font-weight:800;font-size:15.5px;padding:15px 20px;border-radius:999px;cursor:not-allowed">Kirim pre-order</span>
+<span style="text-align:center;font-size:12.5px;font-weight:700;color:#8a2d5c">{{ poHint }}</span>
+</div>
+</sc-if>
+</div>
+</aside>
+</div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;waNumber&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;6281234567890&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Toko&quot;},&quot;pickupSpot&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Kantin pusat kampus&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Pre-order&quot;},&quot;poDays&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:7,&quot;min&quot;:1,&quot;max&quot;:60,&quot;unit&quot;:&quot;hari&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Pre-order&quot;},&quot;sfxDefault&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Bunyi&quot;}}">
+const PRODUCTS = [
+  { id:'butter-mangga', name:'Butter Slime Mangga', cat:'butter', price:35000, stock:6, aroma:'Mangga harum', tekstur:'Lembut, mudah dibentuk', ukuran:'250 gr', tile:'repeating-linear-gradient(45deg,#fff8ec,#fff8ec 8px,#ffe9c4 8px,#ffe9c4 16px)', desc:'Butter slime paling laris. Teksturnya padat tapi lentur, enak buat dibentuk dan dipotong. Aroma mangganya lembut, tidak menyengat.' },
+  { id:'butter-stroberi', name:'Butter Slime Stroberi', cat:'butter', price:35000, stock:3, aroma:'Stroberi susu', tekstur:'Lembut, sedikit padat', ukuran:'250 gr', tile:'repeating-linear-gradient(45deg,#fff0f6,#fff0f6 8px,#ffdcec 8px,#ffdcec 16px)', desc:'Versi manis dari butter slime kami. Warna pink pastel dengan clay halus, cocok buat yang suka main potong-potong.' },
+  { id:'cloud-taro', name:'Cloud Slime Taro', cat:'cloud', price:40000, stock:5, aroma:'Taro creamy', tekstur:'Drizzly, jatuh seperti salju', ukuran:'250 gr', tile:'repeating-linear-gradient(45deg,#f4ebff,#f4ebff 8px,#e6d5ff 8px,#e6d5ff 16px)', desc:'Cloud slime dengan instant snow yang pas: jatuhnya panjang dan berbunyi halus. Favorit untuk video ASMR.' },
+  { id:'cloud-blueberry', name:'Cloud Slime Blueberry', cat:'cloud', price:40000, stock:0, aroma:'Blueberry segar', tekstur:'Drizzly, ringan', ukuran:'250 gr', tile:'repeating-linear-gradient(45deg,#eef4ff,#eef4ff 8px,#d8e4ff 8px,#d8e4ff 16px)', desc:'Biru lembut dengan tekstur ringan. Tidak lengket di tangan meski dimainkan lama.' },
+  { id:'clear-melon', name:'Clear Slime Melon', cat:'clear', price:32000, stock:9, aroma:'Melon dingin', tekstur:'Bening, elastis', ukuran:'200 gr', tile:'repeating-linear-gradient(45deg,#eafaf1,#eafaf1 8px,#cdf0de 8px,#cdf0de 16px)', desc:'Didiamkan dua minggu supaya benar-benar bening. Elastis, cocok buat poking dan bubble popping.' },
+  { id:'clear-soda', name:'Clear Slime Soda', cat:'clear', price:32000, stock:4, aroma:'Soda jeruk', tekstur:'Bening, kenyal', ukuran:'200 gr', tile:'repeating-linear-gradient(45deg,#eef8ff,#eef8ff 8px,#d6ecff 8px,#d6ecff 16px)', desc:'Warna biru soda dengan glitter halus. Bunyi bubble-nya paling nyaring di antara seri clear.' },
+  { id:'crunchy-bubblegum', name:'Crunchy Bubblegum', cat:'crunchy', price:38000, stock:2, aroma:'Permen karet', tekstur:'Renyah, penuh beads', ukuran:'250 gr', tile:'repeating-linear-gradient(45deg,#ffeef5,#ffeef5 8px,#ffd8e8 8px,#ffd8e8 16px)', desc:'Isi foam beads penuh sampai bunyinya konsisten dari awal sampai habis. Yang paling sering dipesan ulang.' },
+  { id:'crunchy-lemon', name:'Crunchy Lemon Fizz', cat:'crunchy', price:38000, stock:7, aroma:'Lemon segar', tekstur:'Renyah, medium beads', ukuran:'250 gr', tile:'repeating-linear-gradient(45deg,#fffbe8,#fffbe8 8px,#fdf0b8 8px,#fdf0b8 16px)', desc:'Beads ukuran sedang, jadi bunyinya lebih halus. Warna kuning cerah yang bikin melek.' },
+  { id:'paket-trio', name:'Paket Trio Bestseller', cat:'paket', price:95000, stock:8, aroma:'Mangga · taro · permen karet', tekstur:'Butter, cloud, crunchy', ukuran:'3 × 250 gr', tile:'repeating-linear-gradient(45deg,#f4ebff,#f4ebff 8px,#ffe9c4 8px,#ffe9c4 16px)', desc:'Butter Mangga, Cloud Taro, dan Crunchy Bubblegum dalam satu paket. Hemat Rp18.000 dari harga satuan.' },
+  { id:'butter-matcha', name:'Butter Slime Matcha', cat:'butter', price:36000, stock:5, isNew:true, aroma:'Matcha latte', tekstur:'Lembut, matte', ukuran:'250 gr', tile:'repeating-linear-gradient(45deg,#f0f7ea,#f0f7ea 8px,#dceccb 8px,#dceccb 16px)', desc:'Hijau tenang dengan permukaan matte. Aromanya paling disukai yang tidak suka wangi manis.' },
+  { id:'cloud-cotton', name:'Cloud Slime Cotton Candy', cat:'cloud', price:42000, stock:2, isNew:true, aroma:'Gulali', tekstur:'Sangat ringan', ukuran:'250 gr', tile:'repeating-linear-gradient(45deg,#fdf0ff,#fdf0ff 8px,#f6d9ff 8px,#f6d9ff 16px)', desc:'Dua warna dalam satu toples, bisa diaduk jadi marble. Edisi terbatas tiap bulan.' },
+  { id:'clear-anggur', name:'Clear Slime Anggur', cat:'clear', price:34000, stock:6, aroma:'Anggur ungu', tekstur:'Bening, tebal', ukuran:'200 gr', tile:'repeating-linear-gradient(45deg,#f6efff,#f6efff 8px,#e4d2fb 8px,#e4d2fb 16px)', desc:'Lebih tebal dari clear lainnya, jadi tarikannya panjang dan tidak gampang putus.' },
+  { id:'crunchy-mint', name:'Crunchy Mint Choco', cat:'crunchy', price:39000, stock:0, aroma:'Mint cokelat', tekstur:'Renyah, beads besar', ukuran:'250 gr', tile:'repeating-linear-gradient(45deg,#eafaf6,#eafaf6 8px,#cdf0e6 8px,#cdf0e6 16px)', desc:'Beads besar dengan taburan sprinkle cokelat. Bunyinya paling tegas di seri crunchy.' }
+];
+const CATS = [['all','Semua'],['butter','Butter'],['cloud','Cloud'],['clear','Clear'],['crunchy','Crunchy'],['paket','Paket']];
+const FEATURED = ['butter-mangga','cloud-taro','clear-melon','crunchy-bubblegum'];
+const HOT = ['crunchy-bubblegum','butter-mangga','cloud-taro','paket-trio'];
+const TIPS = [
+  ['1','Simpan tertutup rapat','Slime kering karena udara, bukan karena waktu. Tutup toples tiap selesai main, simpan di suhu ruang.'],
+  ['2','Cuci tangan dulu','Kotoran dan minyak dari tangan bikin slime cepat berubah warna dan berbau. Tangan kering lebih baik daripada tangan basah.'],
+  ['3','Jangan langsung banyak activator','Kalau terasa lengket, tambahkan activator setetes demi setetes sambil diuleni. Kelebihan activator bikin slime keras dan gampang sobek.'],
+  ['4','Hindari sinar matahari langsung','Panas mempercepat penguapan air. Jauhkan dari jendela, dashboard mobil, dan atas TV.'],
+  ['5','Cloud slime perlu istirahat','Kalau cloud slime terasa berat, diamkan semalam tanpa dimainkan. Instant snow akan menyerap air lagi dan teksturnya kembali.']
+];
+const FAQS = [
+  ['Bagaimana cara pre-order?','Pilih produk dan masukkan ke keranjang, isi nama, lalu tekan kirim pre-order. Pesananmu otomatis tertulis di chat WhatsApp kami. Setelah pembayaran lunas, slime dibuat dan bisa diambil di kampus sekitar seminggu kemudian.'],
+  ['Pembayarannya lewat apa?','Transfer bank atau e-wallet, lunas di awal. Detail pembayaran dikirim admin setelah pesanan dikonfirmasi di WhatsApp.'],
+  ['Slime-nya aman untuk anak?','Bahannya food-grade non-toxic, tapi tetap bukan makanan. Untuk anak di bawah 6 tahun sebaiknya dimainkan dengan pengawasan.'],
+  ['Bisa dikirim ke rumah?','Tidak. Slimu khusus pembelian di lingkungan kampus, tanpa pengiriman ke luar kota. Pesanan diambil langsung di titik ambil yang disebut admin.'],
+  ['Kalau slime-nya bermasalah?','Cek slime saat diambil. Kalau ada yang bocor atau teksturnya tidak sesuai, kirim fotonya ke WhatsApp maksimal 1×24 jam setelah diambil. Kami ganti tanpa biaya tambahan.'],
+  ['Bisa custom warna dan aroma?','Bisa, minimal 3 toples untuk satu permintaan custom. Prosesnya 2–4 hari karena harus diaduk dan didiamkan dulu.']
+];
+const REVIEWS = [
+  ['Nadia P.','Butter Slime Mangga','Teksturnya beda dari yang biasa aku beli di marketplace, lebih padat dan gak gampang encer. Dipakai tiap malam sudah tiga minggu, masih sama.'],
+  ['Raka A.','Crunchy Bubblegum','Bunyinya konsisten sampai habis, gak cuma di awal. Direkam buat konten juga jelas banget suaranya.'],
+  ['Sinta W.','Cloud Slime Taro','Pre-order hari Senin, Jumat sudah bisa diambil. Packing-nya rapi, ada activator kecil dan kartu cara rawatnya.'],
+  ['Fajar M.','Paket Trio Bestseller','Beli buat kado ulang tahun adik. Dia suka yang crunchy, dan paketnya lebih murah daripada beli satuan.']
+];
+const GARANSI = [
+  ['1','Foto dalam 1×24 jam','Begitu paket diterima, foto kondisi dus, bubble wrap, dan toplesnya sebelum dibuka lebih jauh.'],
+  ['2','Kirim ke WhatsApp','Sertakan nama pemesan. Admin memeriksa dan membalas di hari yang sama selama jam kerja.'],
+  ['3','Ganti atau uang kembali','Slime yang bocor, kering, atau salah varian kami ganti dengan produk baru. Kalau stoknya habis, dana dikembalikan penuh.']
+];
+const QUIZ = [
+  ['Sensasi apa yang paling kamu cari?', [
+    ['Diuleni dan dibentuk','butter'], ['Bunyi renyah waktu ditekan','crunchy'],
+    ['Jatuh lembut seperti salju','cloud'], ['Ditarik sampai panjang','clear']
+  ]],
+  ['Biasanya kamu mainkan slime kapan?', [
+    ['Sambil belajar atau nonton','butter'], ['Waktu bikin konten','crunchy'],
+    ['Sebelum tidur, buat menenangkan','cloud'], ['Pas lagi bosan dan penasaran','clear']
+  ]],
+  ['Aroma yang bikin kamu betah?', [
+    ['Buah manis','butter'], ['Permen dan soda','crunchy'],
+    ['Susu creamy','cloud'], ['Segar dan dingin','clear']
+  ]]
+];
+const WHY = {
+  butter:'Jawabanmu mengarah ke tekstur yang padat dan bisa dibentuk. Butter slime paling memuaskan buat diuleni sambil mengerjakan hal lain.',
+  crunchy:'Kamu jelas mengejar suara. Crunchy slime kami diisi foam beads penuh supaya bunyinya tidak hilang setelah beberapa kali main.',
+  cloud:'Kamu cari yang menenangkan. Cloud slime jatuh perlahan dan ringan di tangan, paling cocok dimainkan sebelum tidur.',
+  clear:'Kamu suka yang bisa ditarik dan dilihat. Clear slime kami didiamkan dua minggu supaya benar-benar bening dan elastis.'
+};
+const CART_KEY = 'slimu-cart-v1';
+const SFX_KEY = 'slimu-sfx-v1';
+
+class Component extends DCLogic {
+  state = { page:'home', pid:null, cat:'all', murah:false, q:'', cart:{}, cartOpen:false, faq:0, quiz:[], sfx:false, narrow:false };
+
+  componentDidMount(){
+    this._resize = () => { const n = window.innerWidth < 860; if (n !== this.state.narrow) this.setState({ narrow:n }); };
+    this._resize();
+    window.addEventListener('resize', this._resize);
+    try { const po = JSON.parse(localStorage.getItem('slimu-po-v1') || '{}'); this.setState({ poName:po.poName || '' }); } catch (e) {}
+    try {
+      const v = localStorage.getItem(SFX_KEY);
+      if (v === null ? !!this.props.sfxDefault : v === '1') this.setState({ sfx:true });
+    } catch (e) { if (this.props.sfxDefault) this.setState({ sfx:true }); }
+    try {
+      const raw = localStorage.getItem(CART_KEY);
+      if (!raw) return;
+      const saved = JSON.parse(raw);
+      const clean = {};
+      Object.keys(saved || {}).forEach(id => {
+        const n = parseInt(saved[id], 10);
+        if (PRODUCTS.some(p => p.id === id) && n > 0) clean[id] = n;
+      });
+      if (Object.keys(clean).length) this.setState({ cart:clean });
+      else localStorage.removeItem(CART_KEY);
+    } catch (e) { /* penyimpanan tidak tersedia */ }
+  }
+  componentWillUnmount(){ clearTimeout(this._undoT); window.removeEventListener('resize', this._resize); }
+  saveCart(cart){ try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (e) {} return cart; }
+
+  savePo(patch){
+    try { const cur = JSON.parse(localStorage.getItem('slimu-po-v1') || '{}'); localStorage.setItem('slimu-po-v1', JSON.stringify({ ...cur, ...patch })); } catch (e) {}
+  }
+  toggleSfx(){
+    const on = !this.state.sfx;
+    try { localStorage.setItem(SFX_KEY, on ? '1' : '0'); } catch (e) {}
+    this.setState({ sfx:on });
+    if (on) this.squish('squish');
+  }
+  // Bunyi slime disintesis langsung di browser: noise berfilter + bodi sinus yang turun nadanya.
+  squish(kind){
+    if (!this.state.sfx) return;
+    try {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return;
+      if (!this._ac) this._ac = new AC();
+      const ac = this._ac;
+      if (ac.state === 'suspended') ac.resume();
+      const t = ac.currentTime;
+      const wet = kind === 'squish', pop = kind === 'pop';
+      const dur = wet ? 0.26 : (pop ? 0.11 : 0.2);
+      const len = Math.max(1, Math.ceil(ac.sampleRate * dur));
+      const buf = ac.createBuffer(1, len, ac.sampleRate);
+      const d = buf.getChannelData(0);
+      for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / len);
+      const src = ac.createBufferSource();
+      src.buffer = buf;
+      const lp = ac.createBiquadFilter();
+      lp.type = 'lowpass';
+      lp.Q.value = wet ? 7 : 3.5;
+      lp.frequency.setValueAtTime(pop ? 2400 : 1400, t);
+      lp.frequency.exponentialRampToValueAtTime(pop ? 520 : 190, t + dur);
+      const ng = ac.createGain();
+      ng.gain.setValueAtTime(0.0001, t);
+      ng.gain.exponentialRampToValueAtTime(pop ? 0.16 : 0.24, t + 0.014);
+      ng.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      src.connect(lp); lp.connect(ng); ng.connect(ac.destination);
+      src.start(t); src.stop(t + dur);
+      const osc = ac.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(kind === 'deflate' ? 210 : 260, t);
+      osc.frequency.exponentialRampToValueAtTime(kind === 'deflate' ? 70 : 105, t + dur);
+      const og = ac.createGain();
+      og.gain.setValueAtTime(0.0001, t);
+      og.gain.exponentialRampToValueAtTime(0.14, t + 0.018);
+      og.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      osc.connect(og); og.connect(ac.destination);
+      osc.start(t); osc.stop(t + dur);
+    } catch (e) { /* audio tidak tersedia */ }
+  }
+
+  rp(n){ return 'Rp' + n.toLocaleString('id-ID'); }
+  wa(){ return (this.props.waNumber ?? '6281234567890').replace(/[^0-9]/g,''); }
+  waHref(text){ return 'https://wa.me/' + this.wa() + '?text=' + encodeURIComponent(text); }
+  go(page, pid){ this.setState(s => ({ page, pid: pid ?? null, cartOpen:false, nav:(s.nav||0) + 1 })); window.scrollTo(0,0); }
+  filter(patch){ this.setState(s => ({ ...patch, fil:(s.fil||0) + 1 })); }
+  add(id){
+    const cart = { ...this.state.cart, [id]: (this.state.cart[id] || 0) + 1 };
+    this.saveCart(cart);
+    this.squish('squish');
+    this.setState(s => ({ cart, cartOpen:true, bump:(s.bump||0) + 1 }));
+  }
+  bump(id, d){
+    if ((this.state.cart[id] || 0) + d <= 0) { this.remove(id); return; }
+    const cart = { ...this.state.cart, [id]: (this.state.cart[id] || 0) + d };
+    this.saveCart(cart);
+    this.squish('pop');
+    this.setState({ cart });
+  }
+  remove(id){
+    const qty = this.state.cart[id] || 1;
+    const p = PRODUCTS.find(x => x.id === id);
+    clearTimeout(this._undoT);
+    const cart = { ...this.state.cart };
+    delete cart[id];
+    this.saveCart(cart);
+    this.squish('deflate');
+    this.setState({ cart, undo:{ id, qty, name:p ? p.name : '' } });
+    this._undoT = setTimeout(() => this.setState({ undo:null }), 6000);
+  }
+  undoRemove(){
+    const u = this.state.undo;
+    if (!u) return;
+    clearTimeout(this._undoT);
+    const cart = { ...this.state.cart, [u.id]: (this.state.cart[u.id] || 0) + u.qty };
+    this.saveCart(cart);
+    this.setState({ cart, undo:null });
+  }
+  answer(cat){ this.squish('pop'); this.setState(s => ({ quiz:[...s.quiz, cat] })); }
+
+  badge(p){
+    if (p.stock === 0) return { text:'Habis', bg:'#e6dcc8', color:'#3a3125' };
+    if (p.isNew) return { text:'Baru', bg:'#FFD166', color:'#221c14' };
+    if (p.stock <= 3) return { text:'Sisa ' + p.stock, bg:'#ffd8e8', color:'#8a2d5c' };
+    if (HOT.indexOf(p.id) > -1) return { text:'Paling laris', bg:'#B58CFF', color:'#20143a' };
+    return null;
+  }
+  decorate(p){
+    const b = this.badge(p);
+    const habis = p.stock === 0;
+    return { ...p, priceStr:this.rp(p.price),
+      open:() => this.go('produk', p.id), add:habis ? () => {} : () => this.add(p.id),
+      badge:b ? b.text : '',
+      badgeStyle:b
+        ? 'position:absolute;top:8px;left:8px;background:' + b.bg + ';color:' + b.color + ';border:1.5px solid #221c14;border-radius:999px;padding:5px 11px;font-size:11.5px;font-weight:800'
+        : 'display:none',
+      addLabel:habis ? 'Habis' : '+ Keranjang',
+      addStyle:'border:1.5px solid #221c14;font-size:12.5px;font-weight:800;padding:8px 12px;border-radius:999px;' +
+        (habis ? 'background:#f2ece0;color:#8a7f68;cursor:not-allowed' : 'background:#EDE3FF;color:#4a2b91;cursor:pointer'),
+      addBigLabel:habis ? 'Stok habis' : '+ Masukkan keranjang',
+      addBigStyle:'border:2px solid #221c14;font-weight:800;font-size:15px;padding:15px 28px;border-radius:999px;' +
+        (habis ? 'background:#f2ece0;color:#8a7f68;cursor:not-allowed' : 'background:#B58CFF;color:#20143a;cursor:pointer'),
+      stockPill:habis ? 'Stok habis' : (p.stock <= 3 ? 'Sisa ' + p.stock + ' toples' : 'Stok tersedia'),
+      stockPillStyle:'border:1.5px solid #221c14;border-radius:999px;padding:6px 13px;font-size:12.5px;font-weight:800;' +
+        (habis ? 'background:#e6dcc8;color:#3a3125' : (p.stock <= 3 ? 'background:#ffd8e8;color:#8a2d5c' : 'background:#fff;color:#3a3125')),
+      addStickyLabel:habis ? 'Habis' : '+ Keranjang',
+      addStickyStyle:'flex:none;border:2px solid #221c14;font-weight:800;font-size:14px;padding:13px 18px;border-radius:999px;' +
+        (habis ? 'background:#f2ece0;color:#8a7f68;cursor:not-allowed' : 'background:#B58CFF;color:#20143a;cursor:pointer'),
+      waHref:this.waHref('Halo Slimu! Saya mau tanya stok ' + p.name + ' (' + this.rp(p.price) + '). Masih ada?') };
+  }
+
+  renderVals(){
+    const s = this.state;
+    const q = s.q.trim().toLowerCase();
+    const list = PRODUCTS.filter(p =>
+      (s.cat === 'all' || p.cat === s.cat) &&
+      (!s.murah || p.price < 35000) &&
+      (!q || (p.name + ' ' + p.cat + ' ' + p.aroma + ' ' + p.tekstur).toLowerCase().includes(q)))
+      .sort((a,b) => (a.stock === 0) - (b.stock === 0) ||
+        (HOT.indexOf(a.id) > -1 ? HOT.indexOf(a.id) : 99) - (HOT.indexOf(b.id) > -1 ? HOT.indexOf(b.id) : 99));
+    const ids = Object.keys(s.cart);
+    const lines = ids.map(id => { const p = PRODUCTS.find(x => x.id === id); const qty = s.cart[id];
+      return { name:p.name, tile:p.tile, qty, lineStr:this.rp(p.price) + ' × ' + qty + ' = ' + this.rp(p.price*qty),
+        inc:() => this.bump(id,1), dec:() => this.bump(id,-1), remove:() => this.remove(id) }; });
+    const count = ids.reduce((n,id) => n + s.cart[id], 0);
+    const total = ids.reduce((n,id) => n + s.cart[id] * PRODUCTS.find(x => x.id === id).price, 0);
+    const pickupSpot = this.props.pickupSpot ?? 'Kantin pusat kampus';
+    const poDays = Math.max(1, parseInt(this.props.poDays ?? 7, 10) || 7);
+    const estDate = new Date(Date.now() + poDays * 864e5).toLocaleDateString('id-ID', { day:'numeric', month:'long', year:'numeric' });
+    const poName = (s.poName || '').trim();
+    const poValid = count > 0 && poName.length >= 2;
+    const orderText = ['PRE-ORDER SLIMU', '',
+         'Nama: ' + poName, '',
+         'Pesanan:',
+         ...ids.map((id,i) => { const p = PRODUCTS.find(x => x.id === id); return (i+1) + '. ' + p.name + ' — ' + s.cart[id] + ' pcs × ' + this.rp(p.price) + ' = ' + this.rp(p.price*s.cart[id]); }),
+         '', 'Total: ' + this.rp(total) + ' (tanpa ongkir)',
+         'Pembayaran: lunas di awal',
+         'Pengambilan: ' + pickupSpot,
+         'Estimasi siap: ' + estDate + ' (' + poDays + ' hari setelah pembayaran)', '',
+         'Mohon dikirim detail pembayarannya ya. Terima kasih!'].join('\n');
+    const chip = (on) => 'cursor:pointer;border:1.5px solid #221c14;border-radius:999px;padding:9px 16px;font-family:Nunito,sans-serif;font-size:13.5px;font-weight:800;' +
+      (on ? 'background:#221c14;color:#FBF6EC' : 'background:#fff;color:#4a4132');
+
+    const step = s.quiz.length;
+    const done = step >= QUIZ.length;
+    let winner = 'butter';
+    if (done) {
+      const tally = {};
+      s.quiz.forEach(c => { tally[c] = (tally[c] || 0) + 1; });
+      winner = Object.keys(tally).sort((a,b) => tally[b] - tally[a] || s.quiz.indexOf(a) - s.quiz.indexOf(b))[0];
+    }
+    const rec = PRODUCTS.find(p => p.cat === winner && p.stock > 0) || PRODUCTS[0];
+    const qz = done ? QUIZ[0] : QUIZ[step];
+
+    return {
+      isHome:s.page==='home', isKatalog:s.page==='katalog', isProduk:s.page==='produk', isKuis:s.page==='kuis',
+      isPerawatan:s.page==='perawatan', isKirim:s.page==='kirim', isTentang:s.page==='tentang', isFaq:s.page==='faq', isKontak:s.page==='kontak',
+      goHome:() => this.go('home'), goKatalog:() => this.go('katalog'), goPerawatan:() => this.go('perawatan'),
+      goKirim:() => this.go('kirim'), goTentang:() => this.go('tentang'), goFaq:() => this.go('faq'),
+      goKontak:() => this.go('kontak'), goKuis:() => this.go('kuis'),
+      featured:FEATURED.map(id => this.decorate(PRODUCTS.find(p => p.id === id))),
+      visible:list.map(p => this.decorate(p)),
+      noResults:list.length === 0,
+      p:this.decorate(PRODUCTS.find(x => x.id === s.pid) || PRODUCTS[0]),
+      addBundle:() => this.add('paket-trio'), openBundle:() => this.go('produk','paket-trio'),
+      reviews:REVIEWS.map(([name, item, text]) => ({ name, meta:item, text, stars:'★★★★★' })),
+      garansi:GARANSI.map(([no,title,body]) => ({ no, title, body })),
+      q:s.q, hasQuery:s.q.length > 0,
+      onSearch:(e) => this.filter({ q:e.target.value }),
+      clearSearch:() => this.filter({ q:'' }),
+      cats:CATS.map(([id,label]) => ({ label, style:chip(s.cat === id), pick:() => this.filter({ cat:id }) })),
+      murahStyle:chip(s.murah), toggleMurah:() => this.filter({ murah: !s.murah }),
+      pageAnim:'animation:' + ((s.nav || 0) % 2 ? 'pageA' : 'pageB') + ' .45s cubic-bezier(.2,.7,.3,1) both',
+      gridAnim:'display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px;animation:' + ((s.fil || 0) % 2 ? 'gridA' : 'gridB') + ' .4s cubic-bezier(.2,.7,.3,1) both',
+      resultLabel:q || s.cat !== 'all' || s.murah
+        ? list.length + ' varian cocok dengan pilihanmu'
+        : list.length + ' varian bisa di-pre-order',
+      quizActive: !done, quizDone:done, quizStarted:step > 0,
+      quizStepLabel:'Pertanyaan ' + Math.min(step + 1, QUIZ.length) + ' dari ' + QUIZ.length,
+      quizBarStyle:'height:100%;background:#B58CFF;width:' + Math.round((step / QUIZ.length) * 100) + '%;transition:width .45s cubic-bezier(.2,.7,.3,1)',
+      quizAnim:'animation:' + (step % 2 ? 'quizA' : 'quizB') + ' .4s cubic-bezier(.2,.7,.3,1) both',
+      quizQ:qz[0],
+      quizOpts:qz[1].map(([label, cat]) => ({ label, pick:() => this.answer(cat) })),
+      quizReset:() => this.setState({ quiz:[] }),
+      quizResultName:rec.name, quizResultCat:rec.tekstur, quizResultWhy:WHY[winner],
+      quizResultTile:rec.tile, quizResultPrice:this.rp(rec.price),
+      quizResultOpen:() => this.go('produk', rec.id), quizResultAdd:() => this.add(rec.id),
+      tips:TIPS.map(([no,title,body]) => ({ no, title, body })),
+      faqs:FAQS.map(([q2,a],i) => ({ q:q2, a, open:s.faq === i, sign:s.faq === i ? '−' : '+',
+        toggle:() => this.setState(x => ({ faq: x.faq === i ? -1 : i })) })),
+      cartOpen:s.cartOpen, openCart:() => this.setState({ cartOpen:true }), closeCart:() => this.setState({ cartOpen:false }),
+      lines, cartEmpty:count === 0, cartCount:count, totalStr:this.rp(total),
+      narrow:s.narrow, showSticky: s.narrow && s.page === 'produk',
+      sfxLabel: s.sfx ? 'Bunyi on' : 'Bunyi off',
+      sfxTitle: s.sfx ? 'Matikan bunyi slime' : 'Nyalakan bunyi slime',
+      sfxWave: s.sfx ? 'M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11' : 'M16 9.5l5 5M21 9.5l-5 5',
+      sfxStyle:'flex:none;cursor:pointer;border:2px solid #221c14;border-radius:999px;width:40px;height:40px;padding:0;display:flex;align-items:center;justify-content:center;' +
+        (s.sfx ? 'background:#B58CFF;color:#20143a' : 'background:#fff;color:#6b6047'),
+      toggleSfx:() => this.toggleSfx(),
+      undoOpen: !!s.undo, undoLabel: s.undo ? s.undo.name + ' dihapus' : '', undo:() => this.undoRemove(),
+      badgeStyle:'display:inline-block;background:#B58CFF;border-radius:999px;min-width:22px;padding:1px 7px;font-size:12.5px;text-align:center' +
+        (s.bump ? ';animation:' + (s.bump % 2 ? 'pulseA' : 'pulseB') + ' .58s cubic-bezier(.3,1.4,.5,1)' : ''),
+      waOrder:this.waHref(orderText), poValid, poInvalid:!poValid,
+      poName:s.poName || '',
+      setPoName:(e) => { const v = e.target.value; this.setState({ poName:v }); this.savePo({ poName:v }); },
+      poHint: count === 0 ? 'Keranjang masih kosong.' : 'Isi nama dulu, ya.',
+      estDate, pickupSpot, poDaysLabel: poDays + ' hari',
+      sendPo:() => this.squish('squish'), waPlain:this.waHref('Halo Slimu! Saya mau tanya-tanya soal slime dulu.'),
+      waDisplay:'+' + this.wa()
+    };
+  }
+}
+</script>
+</body>
+</html>
