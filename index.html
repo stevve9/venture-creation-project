@@ -10,7 +10,14 @@
 <link rel="apple-touch-icon" href="./logo.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Slimoo — Katalog & Pre-order Slime Kampus">
-<meta property="og:description" content="Pilih slime favoritmu, pesan lewat WhatsApp, ambil di kampus.">
+<meta property="og:description" content="Pilih slime favoritmu, pesan lewat WhatsApp, ambil di Binus Bekasi.">
+<meta property="og:url" content="https://venture-creation-project-orpin.vercel.app/">
+<meta property="og:image" content="https://venture-creation-project-orpin.vercel.app/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Logo Slimoo: tulisan slime hijau dan maskot sapi berkostum katak">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://venture-creation-project-orpin.vercel.app/">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -120,7 +127,7 @@
 <div style="background:#fff;border:2px solid #3b3819;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:10px">
 <div style="width:40px;height:40px;border-radius:999px;border:2px solid #3b3819;background:#FFD166;display:flex;align-items:center;justify-content:center;font-family:Fredoka,sans-serif;font-weight:600;font-size:19px">3</div>
 <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:20px;line-height:1.2">Bayar lunas</div>
-<p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a4132">Admin membalas dengan detail pembayaran.</p>
+<p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a4132">Admin membalas dengan kode QRIS atau nomor GoPay untuk pembayaran.</p>
 </div>
 <div style="background:#fff;border:2px solid #3b3819;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:10px">
 <div style="width:40px;height:40px;border-radius:999px;border:2px solid #3b3819;background:#cdf0de;display:flex;align-items:center;justify-content:center;font-family:Fredoka,sans-serif;font-weight:600;font-size:19px">4</div>
@@ -342,6 +349,17 @@
 <div style="max-width:1140px;margin:0 auto;padding:0 22px 26px;font-size:13px;color:#6b6047">© 2026 Slimoo · Bekasi, Indonesia</div>
 </footer>
 
+<sc-if value="{{ showCartBar }}" hint-placeholder-val="{{ false }}">
+<div>
+<div style="height:88px"></div>
+<div style="position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:50;animation:faqIn .3s ease">
+<button onClick="{{ openCart }}" aria-label="Buka keranjang" style="width:100%;cursor:pointer;display:flex;align-items:center;gap:12px;background:#3b3819;color:#FCF5E6;border:2px solid #3b3819;border-radius:20px;padding:12px 14px 12px 18px;font-family:Nunito,sans-serif;text-align:left;box-shadow:0 8px 22px rgba(59,56,25,.28)">
+<span style="flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.2"><span style="font-size:12.5px;font-weight:700;opacity:.8">Keranjang · {{ cartCount }} item</span><span style="font-family:Fredoka,sans-serif;font-size:21px">{{ totalStr }}</span></span>
+<span style="flex:none;background:#B7D36A;color:#2d2b10;border-radius:999px;padding:10px 16px;font-size:14px;font-weight:800">Pre-order →</span>
+</button>
+</div>
+</div>
+</sc-if>
 <sc-if value="{{ cartOpen }}" hint-placeholder-val="{{ false }}">
 <div style="position:fixed;inset:0;z-index:60;display:flex;justify-content:flex-end">
 <button onClick="{{ closeCart }}" style="position:absolute;inset:0;border:none;padding:0;cursor:pointer;background:rgba(34,28,20,.42);animation:fadeIn .34s ease"></button>
@@ -384,6 +402,7 @@
 <label style="display:flex;flex-direction:column;gap:5px;font-size:12.5px;font-weight:800;color:#3a3125">Nama
 <input value="{{ poName }}" onChange="{{ setPoName }}" placeholder="Nama kamu" autoComplete="name" style="width:100%;box-sizing:border-box;background:#fff;border:2px solid #3b3819;border-radius:14px;padding:12px 14px;font-family:Nunito,sans-serif;font-size:15px;font-weight:700;color:#3b3819;outline:none" style-focus="border-color:#8db33a;box-shadow:0 0 0 3px #E8EDC4"></input></label>
 </div>
+<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12.5px;font-weight:800;color:#4a4132"><span>Bayar via</span><span style="background:#fff;border:1.5px solid #3b3819;border-radius:999px;padding:4px 11px">QRIS</span><span style="background:#fff;border:1.5px solid #3b3819;border-radius:999px;padding:4px 11px">Transfer GoPay</span></div>
 <p style="margin:0;font-size:13px;line-height:1.55;color:#6b6047">Pre-order dibayar lunas di awal, tanpa ongkir. Ambil di {{ pickupSpot }} pada <b style="color:#3b3819">{{ pickupWhen }}</b>.</p>
 <sc-if value="{{ poValid }}" hint-placeholder-val="{{ false }}">
 <a href="{{ waOrder }}" onClick="{{ sendPo }}" target="_blank" rel="noopener" style="text-align:center;background:#B7D36A;border:2px solid #3b3819;color:#2d2b10;font-weight:800;font-size:15.5px;padding:15px 20px;border-radius:999px" style-hover="background:#a6c456">Kirim pre-order</a>
@@ -421,7 +440,7 @@ const TIPS = [
 ];
 const FAQS = [
   ['Bagaimana cara pre-order?','Pilih produk dan masukkan ke keranjang, isi nama, lalu tekan kirim pre-order. Pesananmu otomatis tertulis di chat WhatsApp kami. Setelah pembayaran lunas, slime dibuat dan semua pesanan bisa diambil di Lantai 3 Wings A, Binus Bekasi pada 24 November 2026, pukul 09.00–12.00 WIB.'],
-  ['Pembayarannya lewat apa?','Transfer bank atau e-wallet, lunas di awal. Detail pembayaran dikirim admin setelah pesanan dikonfirmasi di WhatsApp.'],
+  ['Pembayarannya lewat apa?','Lewat QRIS atau transfer GoPay, lunas di awal. Kode QRIS dan nomor GoPay dikirim admin setelah pesanan dikonfirmasi di WhatsApp.'],
   ['Slime-nya aman untuk anak?','Bahannya food-grade non-toxic, tapi tetap bukan makanan. Untuk anak di bawah 6 tahun sebaiknya dimainkan dengan pengawasan.'],
   ['Bisa dikirim ke rumah?','Tidak. Slimoo khusus pembelian di lingkungan kampus, tanpa pengiriman ke luar kota. Pesanan diambil langsung di Lantai 3 Wings A, Binus Bekasi.'],
   ['Bisa custom warna dan aroma?','Bisa, minimal 3 toples untuk satu permintaan custom. Prosesnya 2–4 hari karena harus diaduk dan didiamkan dulu.']
@@ -624,7 +643,7 @@ class Component extends DCLogic {
          'Pesanan:',
          ...ids.map((id,i) => { const p = PRODUCTS.find(x => x.id === id); return (i+1) + '. ' + p.name + ' — ' + s.cart[id] + ' pcs × ' + this.rp(p.price) + ' = ' + this.rp(p.price*s.cart[id]); }),
          '', 'Total: ' + this.rp(total) + ' (tanpa ongkir)',
-         'Pembayaran: lunas di awal',
+         'Pembayaran: lunas di awal (QRIS / transfer GoPay)',
          'Tempat ambil: ' + pickupSpot,
          'Waktu ambil: ' + pickupWhen, '',
          'Mohon dikirim detail pembayarannya ya. Terima kasih!'].join('\n');
@@ -679,6 +698,7 @@ class Component extends DCLogic {
       cartOpen:s.cartOpen, openCart:() => this.setState({ cartOpen:true }), closeCart:() => this.setState({ cartOpen:false }),
       lines, cartEmpty:count === 0, cartCount:count, totalStr:this.rp(total),
       narrow:s.narrow, showSticky: s.narrow && s.page === 'produk',
+      showCartBar: s.narrow && count > 0 && s.page !== 'produk' && !s.cartOpen,
       sfxLabel: s.sfx ? 'Bunyi on' : 'Bunyi off',
       sfxTitle: s.sfx ? 'Matikan bunyi slime' : 'Nyalakan bunyi slime',
       sfxWave: s.sfx ? 'M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11' : 'M16 9.5l5 5M21 9.5l-5 5',
