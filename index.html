@@ -125,7 +125,7 @@
 <div style="background:#fff;border:2px solid #3b3819;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:10px">
 <div style="width:40px;height:40px;border-radius:999px;border:2px solid #3b3819;background:#cdf0de;display:flex;align-items:center;justify-content:center;font-family:Fredoka,sans-serif;font-weight:600;font-size:19px">4</div>
 <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:20px;line-height:1.2">Dibuat & diambil</div>
-<p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a4132">Slime diaduk setelah pembayaran masuk, lalu siap diambil di {{ pickupSpot }} sekitar {{ poDaysLabel }} kemudian.</p>
+<p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a4132">Ambil pesananmu di {{ pickupSpot }} pada {{ pickupWhen }}.</p>
 </div>
 </div>
 </section>
@@ -134,7 +134,7 @@
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px">
 <div style="background:#fff;border:2px solid #3b3819;border-radius:24px;padding:20px"><div style="font-family:Fredoka,sans-serif;font-size:22px;margin-bottom:6px">Dites dulu</div><p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a4132">Tiap batch dicoba minimal 24 jam sebelum dijual. Kalau nggak enak dimainin, nggak dijual.</p></div>
 <div style="background:#fff;border:2px solid #3b3819;border-radius:24px;padding:20px"><div style="font-family:Fredoka,sans-serif;font-size:22px;margin-bottom:6px">Aman di tangan</div><p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a4132">Bahan food-grade non-toxic, aktivator terukur. Tetap jangan dimakan, ya.</p></div>
-<div style="background:#fff;border:2px solid #3b3819;border-radius:24px;padding:20px"><div style="font-family:Fredoka,sans-serif;font-size:22px;margin-bottom:6px">Pre-order, dibuat baru</div><p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a4132">Slime diaduk setelah kamu pesan dan bayar, lalu siap diambil di kampus sekitar seminggu kemudian. Konfirmasi dan info pembayaran lewat WhatsApp.</p></div>
+<div style="background:#fff;border:2px solid #3b3819;border-radius:24px;padding:20px"><div style="font-family:Fredoka,sans-serif;font-size:22px;margin-bottom:6px">Pre-order, dibuat baru</div><p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a4132">Slime diaduk setelah kamu pesan dan bayar, lalu semua pesanan bisa diambil bersamaan di Lantai 3 Wings A, Binus Bekasi pada 24 November, pukul 09.00–12.00 WIB.</p></div>
 </div>
 </section>
 
@@ -259,7 +259,7 @@
 <button onClick="{{ p.add }}" style="{{ p.addBigStyle }}">{{ p.addBigLabel }}</button>
 <a href="{{ p.waHref }}" target="_blank" rel="noopener" style="border:2px solid #3b3819;color:#3b3819;font-weight:800;font-size:15px;padding:14px 26px;border-radius:999px" style-hover="background:#E8EDC4">Tanya stok di WA</a>
 </div>
-<p style="margin:0;font-size:13.5px;color:#6b6047;line-height:1.6">Diambil langsung di kampus, tanpa ongkir. Konfirmasi dan pembayaran lewat WhatsApp.</p>
+<p style="margin:0;font-size:13.5px;color:#6b6047;line-height:1.6">Diambil di Lantai 3 Wings A, Binus Bekasi pada 24 November, pukul 09.00–12.00 WIB. Konfirmasi dan pembayaran lewat WhatsApp.</p>
 </div>
 </div>
 <sc-if value="{{ showSticky }}" hint-placeholder-val="{{ false }}">
@@ -321,7 +321,7 @@
 <div style="display:flex;flex-direction:column;gap:12px">
 <div style="background:#fff;border:2px solid #3b3819;border-radius:18px;padding:16px"><div style="font-size:11.5px;font-weight:800;color:#5f6b2c;text-transform:uppercase;letter-spacing:.06em">WhatsApp</div><div style="font-size:16px;font-weight:800;margin-top:3px">{{ waDisplay }}</div></div>
 <div style="background:#fff;border:2px solid #3b3819;border-radius:18px;padding:16px"><div style="font-size:11.5px;font-weight:800;color:#5f6b2c;text-transform:uppercase;letter-spacing:.06em">Jam balas</div><div style="font-size:16px;font-weight:800;margin-top:3px">09.00–16.00 WIB</div></div>
-<div style="background:#fff;border:2px solid #3b3819;border-radius:18px;padding:16px"><div style="font-size:11.5px;font-weight:800;color:#5f6b2c;text-transform:uppercase;letter-spacing:.06em">Pengambilan</div><div style="font-size:16px;font-weight:800;margin-top:3px">Di kampus · tanpa ongkir</div></div>
+<div style="background:#fff;border:2px solid #3b3819;border-radius:18px;padding:16px"><div style="font-size:11.5px;font-weight:800;color:#5f6b2c;text-transform:uppercase;letter-spacing:.06em">Pengambilan</div><div style="font-size:16px;font-weight:800;margin-top:3px">Lantai 3 Wings A, Binus Bekasi</div><div style="font-size:13.5px;color:#6b6047;margin-top:2px">24 November · 09.00–12.00 WIB · tanpa ongkir</div></div>
 </div>
 </div>
 </section>
@@ -384,7 +384,7 @@
 <label style="display:flex;flex-direction:column;gap:5px;font-size:12.5px;font-weight:800;color:#3a3125">Nama
 <input value="{{ poName }}" onChange="{{ setPoName }}" placeholder="Nama kamu" autoComplete="name" style="width:100%;box-sizing:border-box;background:#fff;border:2px solid #3b3819;border-radius:14px;padding:12px 14px;font-family:Nunito,sans-serif;font-size:15px;font-weight:700;color:#3b3819;outline:none" style-focus="border-color:#8db33a;box-shadow:0 0 0 3px #E8EDC4"></input></label>
 </div>
-<p style="margin:0;font-size:13px;line-height:1.55;color:#6b6047">Pre-order dibayar lunas di awal, tanpa ongkir. Slime siap diambil di {{ pickupSpot }} sekitar <b style="color:#3b3819">{{ estDate }}</b>.</p>
+<p style="margin:0;font-size:13px;line-height:1.55;color:#6b6047">Pre-order dibayar lunas di awal, tanpa ongkir. Ambil di {{ pickupSpot }} pada <b style="color:#3b3819">{{ pickupWhen }}</b>.</p>
 <sc-if value="{{ poValid }}" hint-placeholder-val="{{ false }}">
 <a href="{{ waOrder }}" onClick="{{ sendPo }}" target="_blank" rel="noopener" style="text-align:center;background:#B7D36A;border:2px solid #3b3819;color:#2d2b10;font-weight:800;font-size:15.5px;padding:15px 20px;border-radius:999px" style-hover="background:#a6c456">Kirim pre-order</a>
 </sc-if>
@@ -401,7 +401,7 @@
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;waNumber&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;6281234567890&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Toko&quot;},&quot;pickupSpot&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Kantin pusat kampus&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Pre-order&quot;},&quot;poDays&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:7,&quot;min&quot;:1,&quot;max&quot;:60,&quot;unit&quot;:&quot;hari&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Pre-order&quot;},&quot;sfxDefault&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Bunyi&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;waNumber&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;6281234567890&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Toko&quot;},&quot;pickupSpot&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Lantai 3 Wings A, Binus Bekasi&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Pre-order&quot;},&quot;pickupWhen&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Selasa, 24 November 2026, pukul 09.00–12.00 WIB&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Pre-order&quot;},&quot;sfxDefault&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Bunyi&quot;}}">
 const PRODUCTS = [
   { id:'leci', name:'Slime Leci', cat:'leci', price:20000, stock:5, aroma:'Leci segar', ukuran:'200 gr', tile:'repeating-linear-gradient(45deg,#fff3f1,#fff3f1 8px,#ffe0dc 8px,#ffe0dc 16px)', desc:'Aroma leci yang segar dan manis ringan. Diaduk sendiri setelah kamu pesan.' },
   { id:'stroberi', name:'Slime Stroberi', cat:'stroberi', price:20000, stock:5, aroma:'Stroberi manis', ukuran:'200 gr', tile:'repeating-linear-gradient(45deg,#ffeef2,#ffeef2 8px,#ffd0dc 8px,#ffd0dc 16px)', desc:'Aroma stroberi manis yang ceria. Diaduk sendiri setelah kamu pesan.' },
@@ -420,10 +420,10 @@ const TIPS = [
   ['5','Jauhkan dari rambut dan kain','Slime yang menempel di rambut atau kain susah dilepas. Mainkan di atas meja, bukan di sofa, karpet, atau dekat rambut.']
 ];
 const FAQS = [
-  ['Bagaimana cara pre-order?','Pilih produk dan masukkan ke keranjang, isi nama, lalu tekan kirim pre-order. Pesananmu otomatis tertulis di chat WhatsApp kami. Setelah pembayaran lunas, slime dibuat dan bisa diambil di kampus sekitar seminggu kemudian.'],
+  ['Bagaimana cara pre-order?','Pilih produk dan masukkan ke keranjang, isi nama, lalu tekan kirim pre-order. Pesananmu otomatis tertulis di chat WhatsApp kami. Setelah pembayaran lunas, slime dibuat dan semua pesanan bisa diambil di Lantai 3 Wings A, Binus Bekasi pada 24 November 2026, pukul 09.00–12.00 WIB.'],
   ['Pembayarannya lewat apa?','Transfer bank atau e-wallet, lunas di awal. Detail pembayaran dikirim admin setelah pesanan dikonfirmasi di WhatsApp.'],
   ['Slime-nya aman untuk anak?','Bahannya food-grade non-toxic, tapi tetap bukan makanan. Untuk anak di bawah 6 tahun sebaiknya dimainkan dengan pengawasan.'],
-  ['Bisa dikirim ke rumah?','Tidak. Slimoo khusus pembelian di lingkungan kampus, tanpa pengiriman ke luar kota. Pesanan diambil langsung di titik ambil yang disebut admin.'],
+  ['Bisa dikirim ke rumah?','Tidak. Slimoo khusus pembelian di lingkungan kampus, tanpa pengiriman ke luar kota. Pesanan diambil langsung di Lantai 3 Wings A, Binus Bekasi.'],
   ['Bisa custom warna dan aroma?','Bisa, minimal 3 toples untuk satu permintaan custom. Prosesnya 2–4 hari karena harus diaduk dan didiamkan dulu.']
 ];
 const REVIEWS = [
@@ -615,9 +615,8 @@ class Component extends DCLogic {
         inc:() => this.bump(id,1), dec:() => this.bump(id,-1), remove:() => this.remove(id) }; });
     const count = ids.reduce((n,id) => n + s.cart[id], 0);
     const total = ids.reduce((n,id) => n + s.cart[id] * PRODUCTS.find(x => x.id === id).price, 0);
-    const pickupSpot = this.props.pickupSpot ?? 'Kantin pusat kampus';
-    const poDays = Math.max(1, parseInt(this.props.poDays ?? 7, 10) || 7);
-    const estDate = new Date(Date.now() + poDays * 864e5).toLocaleDateString('id-ID', { day:'numeric', month:'long', year:'numeric' });
+    const pickupSpot = this.props.pickupSpot ?? 'Lantai 3 Wings A, Binus Bekasi';
+    const pickupWhen = this.props.pickupWhen ?? 'Selasa, 24 November 2026, pukul 09.00–12.00 WIB';
     const poName = (s.poName || '').trim();
     const poValid = count > 0 && poName.length >= 2;
     const orderText = ['PRE-ORDER SLIMOO', '',
@@ -626,8 +625,8 @@ class Component extends DCLogic {
          ...ids.map((id,i) => { const p = PRODUCTS.find(x => x.id === id); return (i+1) + '. ' + p.name + ' — ' + s.cart[id] + ' pcs × ' + this.rp(p.price) + ' = ' + this.rp(p.price*s.cart[id]); }),
          '', 'Total: ' + this.rp(total) + ' (tanpa ongkir)',
          'Pembayaran: lunas di awal',
-         'Pengambilan: ' + pickupSpot,
-         'Estimasi siap: ' + estDate + ' (' + poDays + ' hari setelah pembayaran)', '',
+         'Tempat ambil: ' + pickupSpot,
+         'Waktu ambil: ' + pickupWhen, '',
          'Mohon dikirim detail pembayarannya ya. Terima kasih!'].join('\n');
     const chip = (on) => 'cursor:pointer;border:1.5px solid #3b3819;border-radius:999px;padding:9px 16px;font-family:Nunito,sans-serif;font-size:13.5px;font-weight:800;' +
       (on ? 'background:#3b3819;color:#FCF5E6' : 'background:#fff;color:#4a4132');
@@ -694,7 +693,7 @@ class Component extends DCLogic {
       poName:s.poName || '',
       setPoName:(e) => { const v = e.target.value; this.setState({ poName:v }); this.savePo({ poName:v }); },
       poHint: count === 0 ? 'Keranjang masih kosong.' : 'Isi nama dulu, ya.',
-      estDate, pickupSpot, poDaysLabel: poDays + ' hari',
+      pickupWhen, pickupSpot,
       sendPo:() => this.squish('squish'), waPlain:this.waHref('Halo Slimoo! Saya mau tanya-tanya soal slime dulu.'),
       waDisplay:'+' + this.wa()
     };
