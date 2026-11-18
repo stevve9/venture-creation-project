@@ -442,7 +442,7 @@
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;waNumber&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;6285782999718&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Toko&quot;},&quot;pickupSpot&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Meja 7, Lantai 3 Wings A, Binus Bekasi&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Pre-order&quot;},&quot;pickupWhen&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Selasa, 24 November 2026, pukul 09.00–12.00 WIB&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Pre-order&quot;},&quot;sfxDefault&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Bunyi&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;waNumber&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;6285782009718&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Toko&quot;},&quot;pickupSpot&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Meja 7, Lantai 3 Wings A, Binus Bekasi&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Pre-order&quot;},&quot;pickupWhen&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Selasa, 24 November 2026, pukul 09.00–12.00 WIB&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Pre-order&quot;},&quot;sfxDefault&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Bunyi&quot;}}">
 const PRODUCTS = [
   { id:'leci', name:'Slime Leci', cat:'leci', price:20000, stock:5, aroma:'Leci segar', ukuran:'200 gr', tile:'repeating-linear-gradient(45deg,#fff3f1,#fff3f1 8px,#ffe0dc 8px,#ffe0dc 16px)', desc:'Aroma leci yang segar dan manis ringan. Diaduk sendiri setelah kamu pesan.' },
   { id:'stroberi', name:'Slime Stroberi', cat:'stroberi', price:20000, stock:5, aroma:'Stroberi manis', ukuran:'200 gr', tile:'repeating-linear-gradient(45deg,#ffeef2,#ffeef2 8px,#ffd0dc 8px,#ffd0dc 16px)', desc:'Aroma stroberi manis yang ceria. Diaduk sendiri setelah kamu pesan.' },
@@ -576,7 +576,7 @@ class Component extends DCLogic {
   }
 
   rp(n){ return 'Rp' + n.toLocaleString('id-ID'); }
-  wa(){ const n = (this.props.waNumber ?? '6285782999718').replace(/[^0-9]/g,''); return n.startsWith('0') ? '62' + n.slice(1) : n; }
+  wa(){ const n = (this.props.waNumber ?? '6285782009718').replace(/[^0-9]/g,''); return n.startsWith('0') ? '62' + n.slice(1) : n; }
   waHref(text){ return 'https://wa.me/' + this.wa() + '?text=' + encodeURIComponent(text); }
   // Pindah halaman. Setiap perpindahan dicatat di riwayat browser, jadi tombol "back"
   // (di browser maupun tombol back HP) kembali ke halaman sebelumnya, bukan keluar dari situs.
