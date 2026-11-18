@@ -94,7 +94,7 @@
 <sc-for list="{{ featured }}" as="p" hint-placeholder-count="4">
 <div style="background:#fff;border:2px solid #3b3819;border-radius:24px;padding:12px;display:flex;flex-direction:column;gap:10px;transition:transform .3s cubic-bezier(.2,.7,.3,1),box-shadow .3s ease" style-hover="transform:translateY(-7px);box-shadow:0 10px 0 -2px rgba(34,28,20,.18)">
 <div style="position:relative">
-<button onClick="{{ p.open }}" style="cursor:pointer;padding:0;border:none;background:none;display:block;width:100%"><div style="aspect-ratio:1/1;border-radius:16px;background:{{ p.tile }}"></div></button>
+<button onClick="{{ p.open }}" style="cursor:pointer;padding:0;border:none;background:none;display:block;width:100%"><div role="img" aria-label="Foto {{ p.name }}" style="aspect-ratio:1/1;border-radius:16px;background:{{ p.photo1 }}"></div></button>
 <span style="{{ p.badgeStyle }}">{{ p.badge }}</span>
 </div>
 <div style="display:flex;flex-direction:column;gap:3px">
@@ -127,7 +127,7 @@
 <div style="background:#fff;border:2px solid #3b3819;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:10px">
 <div style="width:40px;height:40px;border-radius:999px;border:2px solid #3b3819;background:#FFD166;display:flex;align-items:center;justify-content:center;font-family:Fredoka,sans-serif;font-weight:600;font-size:19px">3</div>
 <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:20px;line-height:1.2">Bayar lunas</div>
-<p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a4132">Admin membalas dengan kode QRIS atau nomor GoPay untuk pembayaran.</p>
+<p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a4132">Admin membalas dengan kode QRIS untuk pembayaran.</p>
 </div>
 <div style="background:#fff;border:2px solid #3b3819;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:10px">
 <div style="width:40px;height:40px;border-radius:999px;border:2px solid #3b3819;background:#cdf0de;display:flex;align-items:center;justify-content:center;font-family:Fredoka,sans-serif;font-weight:600;font-size:19px">4</div>
@@ -141,7 +141,7 @@
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px">
 <div style="background:#fff;border:2px solid #3b3819;border-radius:24px;padding:20px"><div style="font-family:Fredoka,sans-serif;font-size:22px;margin-bottom:6px">Dites dulu</div><p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a4132">Tiap batch dicoba minimal 24 jam sebelum dijual. Kalau nggak enak dimainin, nggak dijual.</p></div>
 <div style="background:#fff;border:2px solid #3b3819;border-radius:24px;padding:20px"><div style="font-family:Fredoka,sans-serif;font-size:22px;margin-bottom:6px">Aman di tangan</div><p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a4132">Bahan food-grade non-toxic, aktivator terukur. Tetap jangan dimakan, ya.</p></div>
-<div style="background:#fff;border:2px solid #3b3819;border-radius:24px;padding:20px"><div style="font-family:Fredoka,sans-serif;font-size:22px;margin-bottom:6px">Pre-order, dibuat baru</div><p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a4132">Slime diaduk setelah kamu pesan dan bayar, lalu semua pesanan bisa diambil bersamaan di Lantai 3 Wings A, Binus Bekasi pada 24 November, pukul 09.00–12.00 WIB.</p></div>
+<div style="background:#fff;border:2px solid #3b3819;border-radius:24px;padding:20px"><div style="font-family:Fredoka,sans-serif;font-size:22px;margin-bottom:6px">Pre-order, dibuat baru</div><p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a4132">Slime diaduk setelah kamu pesan dan bayar, lalu semua pesanan bisa diambil bersamaan di Meja 7, Lantai 3 Wings A, Binus Bekasi pada 24 November, pukul 09.00–12.00 WIB.</p></div>
 </div>
 </section>
 
@@ -168,7 +168,7 @@
 <sc-for list="{{ visible }}" as="p" hint-placeholder-count="8">
 <div style="background:#fff;border:2px solid #3b3819;border-radius:24px;padding:12px;display:flex;flex-direction:column;gap:10px;transition:transform .3s cubic-bezier(.2,.7,.3,1),box-shadow .3s ease" style-hover="transform:translateY(-7px);box-shadow:0 10px 0 -2px rgba(34,28,20,.18)">
 <div style="position:relative">
-<button onClick="{{ p.open }}" style="cursor:pointer;padding:0;border:none;background:none;display:block;width:100%"><div style="aspect-ratio:1/1;border-radius:16px;background:{{ p.tile }}"></div></button>
+<button onClick="{{ p.open }}" style="cursor:pointer;padding:0;border:none;background:none;display:block;width:100%"><div role="img" aria-label="Foto {{ p.name }}" style="aspect-ratio:1/1;border-radius:16px;background:{{ p.photo1 }}"></div></button>
 <span style="{{ p.badgeStyle }}">{{ p.badge }}</span>
 </div>
 <div style="display:flex;flex-direction:column;gap:3px">
@@ -243,11 +243,10 @@
 <button onClick="{{ goKatalog }}" style="background:none;border:none;cursor:pointer;font-size:14px;font-weight:800;color:#5f6b2c;padding:0;margin-bottom:18px">← Kembali ke katalog</button>
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:34px;align-items:start">
 <div style="display:flex;flex-direction:column;gap:12px;min-width:0">
-<div style="aspect-ratio:1/1;border:2px solid #3b3819;border-radius:28px;background:{{ p.tile }};display:flex;align-items:center;justify-content:center"><span style="font:11px ui-monospace,Menlo,monospace;color:#3a3125;background:#fff;padding:6px 10px;border-radius:6px;border:1.5px solid #3b3819">foto produk</span></div>
-<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
-<div style="aspect-ratio:1/1;border:2px solid #3b3819;border-radius:18px;background:{{ p.tile }}"></div>
-<div style="aspect-ratio:1/1;border:2px solid #3b3819;border-radius:18px;background:repeating-linear-gradient(45deg,#f7f2e6,#f7f2e6 8px,#ece2cd 8px,#ece2cd 16px)"></div>
-<div style="aspect-ratio:1/1;border:2px solid #3b3819;border-radius:18px;background:repeating-linear-gradient(45deg,#e8edc4,#e8edc4 8px,#d2da8a 8px,#d2da8a 16px)"></div>
+<div role="img" aria-label="Foto {{ p.name }}" style="aspect-ratio:1/1;border:2px solid #3b3819;border-radius:28px;background:{{ galleryMain }}"></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:260px">
+<button onClick="{{ showPhoto1 }}" aria-label="Foto 1" style="{{ thumb1Style }}"></button>
+<button onClick="{{ showPhoto2 }}" aria-label="Foto 2" style="{{ thumb2Style }}"></button>
 </div>
 </div>
 <div style="display:flex;flex-direction:column;gap:16px;min-width:0">
@@ -266,7 +265,7 @@
 <button onClick="{{ p.add }}" style="{{ p.addBigStyle }}">{{ p.addBigLabel }}</button>
 <a href="{{ p.waHref }}" target="_blank" rel="noopener" style="border:2px solid #3b3819;color:#3b3819;font-weight:800;font-size:15px;padding:14px 26px;border-radius:999px" style-hover="background:#E8EDC4">Tanya stok di WA</a>
 </div>
-<p style="margin:0;font-size:13.5px;color:#6b6047;line-height:1.6">Diambil di Lantai 3 Wings A, Binus Bekasi pada 24 November, pukul 09.00–12.00 WIB. Konfirmasi dan pembayaran lewat WhatsApp.</p>
+<p style="margin:0;font-size:13.5px;color:#6b6047;line-height:1.6">Diambil di Meja 7, Lantai 3 Wings A, Binus Bekasi pada 24 November, pukul 09.00–12.00 WIB. Konfirmasi dan pembayaran lewat WhatsApp.</p>
 </div>
 </div>
 <sc-if value="{{ showSticky }}" hint-placeholder-val="{{ false }}">
@@ -328,7 +327,7 @@
 <div style="display:flex;flex-direction:column;gap:12px">
 <div style="background:#fff;border:2px solid #3b3819;border-radius:18px;padding:16px"><div style="font-size:11.5px;font-weight:800;color:#5f6b2c;text-transform:uppercase;letter-spacing:.06em">WhatsApp</div><div style="font-size:16px;font-weight:800;margin-top:3px">{{ waDisplay }}</div></div>
 <div style="background:#fff;border:2px solid #3b3819;border-radius:18px;padding:16px"><div style="font-size:11.5px;font-weight:800;color:#5f6b2c;text-transform:uppercase;letter-spacing:.06em">Jam balas</div><div style="font-size:16px;font-weight:800;margin-top:3px">09.00–16.00 WIB</div></div>
-<div style="background:#fff;border:2px solid #3b3819;border-radius:18px;padding:16px"><div style="font-size:11.5px;font-weight:800;color:#5f6b2c;text-transform:uppercase;letter-spacing:.06em">Pengambilan</div><div style="font-size:16px;font-weight:800;margin-top:3px">Lantai 3 Wings A, Binus Bekasi</div><div style="font-size:13.5px;color:#6b6047;margin-top:2px">24 November · 09.00–12.00 WIB · tanpa ongkir</div></div>
+<div style="background:#fff;border:2px solid #3b3819;border-radius:18px;padding:16px"><div style="font-size:11.5px;font-weight:800;color:#5f6b2c;text-transform:uppercase;letter-spacing:.06em">Pengambilan</div><div style="font-size:16px;font-weight:800;margin-top:3px">Meja 7, Lantai 3 Wings A, Binus Bekasi</div><div style="font-size:13.5px;color:#6b6047;margin-top:2px">24 November · 09.00–12.00 WIB · tanpa ongkir</div></div>
 </div>
 </div>
 </section>
@@ -402,7 +401,7 @@
 <label style="display:flex;flex-direction:column;gap:5px;font-size:12.5px;font-weight:800;color:#3a3125">Nama
 <input value="{{ poName }}" onChange="{{ setPoName }}" placeholder="Nama kamu" autoComplete="name" style="width:100%;box-sizing:border-box;background:#fff;border:2px solid #3b3819;border-radius:14px;padding:12px 14px;font-family:Nunito,sans-serif;font-size:15px;font-weight:700;color:#3b3819;outline:none" style-focus="border-color:#8db33a;box-shadow:0 0 0 3px #E8EDC4"></input></label>
 </div>
-<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12.5px;font-weight:800;color:#4a4132"><span>Bayar via</span><span style="background:#fff;border:1.5px solid #3b3819;border-radius:999px;padding:4px 11px">QRIS</span><span style="background:#fff;border:1.5px solid #3b3819;border-radius:999px;padding:4px 11px">Transfer GoPay</span></div>
+<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12.5px;font-weight:800;color:#4a4132"><span>Bayar via</span><span style="background:#fff;border:1.5px solid #3b3819;border-radius:999px;padding:4px 11px">QRIS</span><span style="font-weight:700;color:#6b6047">bisa dari m-banking atau e-wallet apa pun</span></div>
 <p style="margin:0;font-size:13px;line-height:1.55;color:#6b6047">Pre-order dibayar lunas di awal, tanpa ongkir. Ambil di {{ pickupSpot }} pada <b style="color:#3b3819">{{ pickupWhen }}</b>.</p>
 <sc-if value="{{ poValid }}" hint-placeholder-val="{{ false }}">
 <a href="{{ waOrder }}" onClick="{{ sendPo }}" target="_blank" rel="noopener" style="text-align:center;background:#B7D36A;border:2px solid #3b3819;color:#2d2b10;font-weight:800;font-size:15.5px;padding:15px 20px;border-radius:999px" style-hover="background:#a6c456">Kirim pre-order</a>
@@ -420,7 +419,7 @@
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;waNumber&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;6281234567890&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Toko&quot;},&quot;pickupSpot&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Lantai 3 Wings A, Binus Bekasi&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Pre-order&quot;},&quot;pickupWhen&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Selasa, 24 November 2026, pukul 09.00–12.00 WIB&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Pre-order&quot;},&quot;sfxDefault&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Bunyi&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;waNumber&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;6281234567890&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Toko&quot;},&quot;pickupSpot&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Meja 7, Lantai 3 Wings A, Binus Bekasi&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Pre-order&quot;},&quot;pickupWhen&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Selasa, 24 November 2026, pukul 09.00–12.00 WIB&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Pre-order&quot;},&quot;sfxDefault&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Bunyi&quot;}}">
 const PRODUCTS = [
   { id:'leci', name:'Slime Leci', cat:'leci', price:20000, stock:5, aroma:'Leci segar', ukuran:'200 gr', tile:'repeating-linear-gradient(45deg,#fff3f1,#fff3f1 8px,#ffe0dc 8px,#ffe0dc 16px)', desc:'Aroma leci yang segar dan manis ringan. Diaduk sendiri setelah kamu pesan.' },
   { id:'stroberi', name:'Slime Stroberi', cat:'stroberi', price:20000, stock:5, aroma:'Stroberi manis', ukuran:'200 gr', tile:'repeating-linear-gradient(45deg,#ffeef2,#ffeef2 8px,#ffd0dc 8px,#ffd0dc 16px)', desc:'Aroma stroberi manis yang ceria. Diaduk sendiri setelah kamu pesan.' },
@@ -439,10 +438,10 @@ const TIPS = [
   ['5','Jauhkan dari rambut dan kain','Slime yang menempel di rambut atau kain susah dilepas. Mainkan di atas meja, bukan di sofa, karpet, atau dekat rambut.']
 ];
 const FAQS = [
-  ['Bagaimana cara pre-order?','Pilih produk dan masukkan ke keranjang, isi nama, lalu tekan kirim pre-order. Pesananmu otomatis tertulis di chat WhatsApp kami. Setelah pembayaran lunas, slime dibuat dan semua pesanan bisa diambil di Lantai 3 Wings A, Binus Bekasi pada 24 November 2026, pukul 09.00–12.00 WIB.'],
-  ['Pembayarannya lewat apa?','Lewat QRIS atau transfer GoPay, lunas di awal. Kode QRIS dan nomor GoPay dikirim admin setelah pesanan dikonfirmasi di WhatsApp.'],
+  ['Bagaimana cara pre-order?','Pilih produk dan masukkan ke keranjang, isi nama, lalu tekan kirim pre-order. Pesananmu otomatis tertulis di chat WhatsApp kami. Setelah pembayaran lunas, slime dibuat dan semua pesanan bisa diambil di Meja 7, Lantai 3 Wings A, Binus Bekasi pada 24 November 2026, pukul 09.00–12.00 WIB.'],
+  ['Pembayarannya lewat apa?','Lewat QRIS, lunas di awal. QRIS bisa dibayar dari m-banking atau e-wallet apa pun (GoPay, OVO, DANA, ShopeePay, dll). Kode QRIS dikirim admin setelah pesanan dikonfirmasi di WhatsApp.'],
   ['Slime-nya aman untuk anak?','Bahannya food-grade non-toxic, tapi tetap bukan makanan. Untuk anak di bawah 6 tahun sebaiknya dimainkan dengan pengawasan.'],
-  ['Bisa dikirim ke rumah?','Tidak. Slimoo khusus pembelian di lingkungan kampus, tanpa pengiriman ke luar kota. Pesanan diambil langsung di Lantai 3 Wings A, Binus Bekasi.'],
+  ['Bisa dikirim ke rumah?','Tidak. Slimoo khusus pembelian di lingkungan kampus, tanpa pengiriman ke luar kota. Pesanan diambil langsung di Meja 7, Lantai 3 Wings A, Binus Bekasi.'],
   ['Bisa custom warna dan aroma?','Bisa, minimal 3 toples untuk satu permintaan custom. Prosesnya 2–4 hari karena harus diaduk dan didiamkan dulu.']
 ];
 const REVIEWS = [
@@ -479,6 +478,11 @@ const WHY = {
 };
 const CART_KEY = 'slimu-cart-v1';
 const SFX_KEY = 'slimu-sfx-v1';
+// Foto produk: taruh di folder images/ dengan nama <id>-1.jpg dan <id>-2.jpg (mis. images/leci-1.jpg).
+// Kalau file belum ada, otomatis tampil pola warna (tile) produk.
+const PHOTO_DIR = './images/';
+const PHOTO_EXT = '.jpg';
+const photoBg = (p, n) => "url('" + PHOTO_DIR + p.id + '-' + n + PHOTO_EXT + "') center/cover no-repeat, " + p.tile;
 const SFX_SRC = { squish:'./slime-squish.mp3', pop:'./slime-pop.mp3', deflate:'./slime-deflate.mp3' };
 
 class Component extends DCLogic {
@@ -542,7 +546,7 @@ class Component extends DCLogic {
   rp(n){ return 'Rp' + n.toLocaleString('id-ID'); }
   wa(){ return (this.props.waNumber ?? '6281234567890').replace(/[^0-9]/g,''); }
   waHref(text){ return 'https://wa.me/' + this.wa() + '?text=' + encodeURIComponent(text); }
-  go(page, pid){ this.setState(s => ({ page, pid: pid ?? null, cartOpen:false, nav:(s.nav||0) + 1 })); window.scrollTo(0,0); }
+  go(page, pid){ this.setState(s => ({ page, pid: pid ?? null, photo:1, cartOpen:false, nav:(s.nav||0) + 1 })); window.scrollTo(0,0); }
   filter(patch){ this.setState(s => ({ ...patch, fil:(s.fil||0) + 1 })); }
   stockLimit(id){
     const p = PRODUCTS.find(x => x.id === id);
@@ -600,6 +604,7 @@ class Component extends DCLogic {
     const b = this.badge(p);
     const habis = p.stock === 0;
     return { ...p, priceStr:this.rp(p.price),
+      photo1:photoBg(p, 1), photo2:photoBg(p, 2),
       open:() => this.go('produk', p.id), add:habis ? () => {} : () => this.add(p.id),
       badge:b ? b.text : '',
       badgeStyle:b
@@ -630,11 +635,11 @@ class Component extends DCLogic {
         (HOT.indexOf(a.id) > -1 ? HOT.indexOf(a.id) : 99) - (HOT.indexOf(b.id) > -1 ? HOT.indexOf(b.id) : 99));
     const ids = Object.keys(s.cart);
     const lines = ids.map(id => { const p = PRODUCTS.find(x => x.id === id); const qty = s.cart[id];
-      return { name:p.name, tile:p.tile, qty, lineStr:this.rp(p.price) + ' × ' + qty + ' = ' + this.rp(p.price*qty),
+      return { name:p.name, tile:photoBg(p, 1), qty, lineStr:this.rp(p.price) + ' × ' + qty + ' = ' + this.rp(p.price*qty),
         inc:() => this.bump(id,1), dec:() => this.bump(id,-1), remove:() => this.remove(id) }; });
     const count = ids.reduce((n,id) => n + s.cart[id], 0);
     const total = ids.reduce((n,id) => n + s.cart[id] * PRODUCTS.find(x => x.id === id).price, 0);
-    const pickupSpot = this.props.pickupSpot ?? 'Lantai 3 Wings A, Binus Bekasi';
+    const pickupSpot = this.props.pickupSpot ?? 'Meja 7, Lantai 3 Wings A, Binus Bekasi';
     const pickupWhen = this.props.pickupWhen ?? 'Selasa, 24 November 2026, pukul 09.00–12.00 WIB';
     const poName = (s.poName || '').trim();
     const poValid = count > 0 && poName.length >= 2;
@@ -643,7 +648,7 @@ class Component extends DCLogic {
          'Pesanan:',
          ...ids.map((id,i) => { const p = PRODUCTS.find(x => x.id === id); return (i+1) + '. ' + p.name + ' — ' + s.cart[id] + ' pcs × ' + this.rp(p.price) + ' = ' + this.rp(p.price*s.cart[id]); }),
          '', 'Total: ' + this.rp(total) + ' (tanpa ongkir)',
-         'Pembayaran: lunas di awal (QRIS / transfer GoPay)',
+         'Pembayaran: lunas di awal via QRIS',
          'Tempat ambil: ' + pickupSpot,
          'Waktu ambil: ' + pickupWhen, '',
          'Mohon dikirim detail pembayarannya ya. Terima kasih!'].join('\n');
@@ -661,6 +666,8 @@ class Component extends DCLogic {
     const rec = PRODUCTS.find(p => p.cat === winner && p.stock > 0) || PRODUCTS[0];
     const qz = done ? QUIZ[0] : QUIZ[step];
 
+    const gp = PRODUCTS.find(x => x.id === s.pid) || PRODUCTS[0];
+    const thumb = (n) => 'aspect-ratio:1/1;cursor:pointer;padding:0;border-radius:18px;background:' + photoBg(gp, n) + ';border:' + ((s.photo === 2 ? 2 : 1) === n ? '3px solid #3b3819' : '2px solid #c9bf9e') + ';opacity:' + ((s.photo === 2 ? 2 : 1) === n ? '1' : '.75');
     return {
       isHome:s.page==='home', isKatalog:s.page==='katalog', isProduk:s.page==='produk', isKuis:s.page==='kuis',
       isPerawatan:s.page==='perawatan', isKirim:s.page==='kirim', isTentang:s.page==='tentang', isFaq:s.page==='faq', isKontak:s.page==='kontak',
@@ -671,6 +678,9 @@ class Component extends DCLogic {
       visible:list.map(p => this.decorate(p)),
       noResults:list.length === 0,
       p:this.decorate(PRODUCTS.find(x => x.id === s.pid) || PRODUCTS[0]),
+      galleryMain:photoBg(PRODUCTS.find(x => x.id === s.pid) || PRODUCTS[0], s.photo === 2 ? 2 : 1),
+      showPhoto1:() => this.setState({ photo:1 }), showPhoto2:() => this.setState({ photo:2 }),
+      thumb1Style:thumb(1), thumb2Style:thumb(2),
       reviews:REVIEWS.map(([name, item, text]) => ({ name, meta:item, text, stars:'★★★★★' })),
       garansi:GARANSI.map(([no,title,body]) => ({ no, title, body })),
       cats:CATS.map(([id,label]) => ({ label, style:chip(s.cat === id), pick:() => this.filter({ cat:id }) })),
