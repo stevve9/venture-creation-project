@@ -103,8 +103,8 @@
 
 <div style="background:#3b3819;color:#FCF5E6;padding:13px 0;overflow:hidden">
 <div style="display:flex;width:max-content;animation:marquee 30s linear infinite;font-family:Fredoka,sans-serif;font-weight:500;font-size:16px;letter-spacing:.02em">
-<span style="padding-right:40px;white-space:nowrap">TANPA ONGKIR ✦ AMBIL DI KAMPUS ✦ BONUS ACTIVATOR ✦ 5 AROMA PILIHAN ✦ BAYAR VIA QRIS ✦</span>
-<span style="padding-right:40px;white-space:nowrap">TANPA ONGKIR ✦ AMBIL DI KAMPUS ✦ BONUS ACTIVATOR ✦ 5 AROMA PILIHAN ✦ BAYAR VIA QRIS ✦</span>
+<span style="padding-right:40px;white-space:nowrap">TANPA ONGKIR ✦ AMBIL DI KAMPUS ✦ 5 AROMA PILIHAN ✦ BAYAR VIA QRIS ✦ PRE-ORDER 18–22 NOVEMBER ✦</span>
+<span style="padding-right:40px;white-space:nowrap">TANPA ONGKIR ✦ AMBIL DI KAMPUS ✦ 5 AROMA PILIHAN ✦ BAYAR VIA QRIS ✦ PRE-ORDER 18–22 NOVEMBER ✦</span>
 </div>
 </div>
 
@@ -507,12 +507,6 @@ const FAQS = [
   ['Slime-nya aman untuk anak?','Bahannya food-grade non-toxic, tapi tetap bukan makanan. Untuk anak di bawah 6 tahun sebaiknya dimainkan dengan pengawasan.'],
   ['Bisa dikirim ke rumah?','Tidak. Slimoo khusus pembelian di lingkungan kampus, tanpa pengiriman ke luar kota. Pesanan diambil langsung di Meja 7, Lantai 3 Wings A, Binus Bekasi.']
 ];
-const REVIEWS = [
-  ['Nadia P.','Slime Mangga','Aromanya enak dan tidak menyengat. Dipakai tiap malam sudah tiga minggu, masih sama.'],
-  ['Raka A.','Slime Bubblegum','Wangi permen karetnya terasa sampai habis, dan dimainkan lama pun tidak bikin bosan.'],
-  ['Sinta W.','Slime Stroberi','Pre-order hari Senin, Jumat sudah bisa diambil. Packing-nya rapi, ada activator kecil dan kartu cara rawatnya.'],
-  ['Fajar M.','Slime Coklat','Beli buat kado ulang tahun adik, dia suka sekali. Aromanya manis hangat dan tidak bikin pusing.']
-];
 const GARANSI = [
   ['1','Foto dalam 1×24 jam','Saat mengambil pesanan, langsung cek dan foto kondisi toples serta tutupnya sebelum dibuka lebih jauh.'],
   ['2','Kirim ke WhatsApp','Sertakan nama pemesan. Admin memeriksa dan membalas di hari yang sama selama jam kerja.'],
@@ -784,7 +778,6 @@ class Component extends DCLogic {
       galleryMain:photoBg(PRODUCTS.find(x => x.id === s.pid) || PRODUCTS[0], s.photo === 2 ? 2 : 1),
       showPhoto1:() => this.setState({ photo:1 }), showPhoto2:() => this.setState({ photo:2 }),
       thumb1Style:thumb(1), thumb2Style:thumb(2),
-      reviews:REVIEWS.map(([name, item, text]) => ({ name, meta:item, text, stars:'★★★★★' })),
       garansi:GARANSI.map(([no,title,body]) => ({ no, title, body })),
       cats:CATS.map(([id,label]) => ({ label, style:chip(s.cat === id), pick:() => this.filter({ cat:id }) })),
       q:s.q, hasQuery:s.q.length > 0,
