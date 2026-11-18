@@ -401,8 +401,11 @@
 <label style="display:flex;flex-direction:column;gap:5px;font-size:12.5px;font-weight:800;color:#3a3125">Nama
 <input value="{{ poName }}" onChange="{{ setPoName }}" placeholder="Nama kamu" autoComplete="name" style="width:100%;box-sizing:border-box;background:#fff;border:2px solid #3b3819;border-radius:14px;padding:12px 14px;font-family:Nunito,sans-serif;font-size:15px;font-weight:700;color:#3b3819;outline:none" style-focus="border-color:#8db33a;box-shadow:0 0 0 3px #E8EDC4"></input></label>
 </div>
-<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12.5px;font-weight:800;color:#4a4132"><span>Bayar via</span><span style="background:#fff;border:1.5px solid #3b3819;border-radius:999px;padding:4px 11px">QRIS</span><span style="font-weight:700;color:#6b6047">bisa dari m-banking atau e-wallet apa pun</span></div>
-<p style="margin:0;font-size:13px;line-height:1.55;color:#6b6047">Pre-order dibayar lunas di awal, tanpa ongkir. Ambil di {{ pickupSpot }} pada <b style="color:#3b3819">{{ pickupWhen }}</b>.</p>
+<div style="background:#fff;border:1.5px solid #e3dbb4;border-radius:16px;padding:12px 14px;display:grid;grid-template-columns:62px 1fr;row-gap:10px;column-gap:10px">
+<span style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#7a7052;padding-top:2px">Bayar</span><span style="font-size:13.5px;font-weight:700;color:#3b3819;line-height:1.45">QRIS, lunas di awal<span style="display:block;font-size:12.5px;font-weight:600;color:#6b6047">Bisa dari m-banking atau e-wallet apa pun</span></span>
+<span style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#7a7052;padding-top:2px">Tempat</span><span style="font-size:13.5px;font-weight:700;color:#3b3819;line-height:1.45">{{ pickupSpot }}<span style="display:block;font-size:12.5px;font-weight:600;color:#6b6047">Ambil sendiri, tanpa ongkir</span></span>
+<span style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#7a7052;padding-top:2px">Waktu</span><span style="font-size:13.5px;font-weight:700;color:#3b3819;line-height:1.45">{{ pickupWhen }}</span>
+</div>
 <sc-if value="{{ poValid }}" hint-placeholder-val="{{ false }}">
 <a href="{{ waOrder }}" onClick="{{ sendPo }}" target="_blank" rel="noopener" style="text-align:center;background:#B7D36A;border:2px solid #3b3819;color:#2d2b10;font-weight:800;font-size:15.5px;padding:15px 20px;border-radius:999px" style-hover="background:#a6c456">Kirim pre-order</a>
 </sc-if>
