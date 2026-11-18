@@ -145,12 +145,12 @@
 <div style="background:#fff;border:2px solid #3b3819;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:10px">
 <div style="width:40px;height:40px;border-radius:999px;border:2px solid #3b3819;background:#ffd8e8;display:flex;align-items:center;justify-content:center;font-family:Fredoka,sans-serif;font-weight:600;font-size:19px">2</div>
 <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:20px;line-height:1.2">Isi nama</div>
-<p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a4132">Tekan kirim pre-order. Pesananmu otomatis tertulis di chat WhatsApp kami.</p>
+<p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a4132">Buka keranjang, isi namamu, lalu tekan Lanjut bayar.</p>
 </div>
 <div style="background:#fff;border:2px solid #3b3819;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:10px">
 <div style="width:40px;height:40px;border-radius:999px;border:2px solid #3b3819;background:#FFD166;display:flex;align-items:center;justify-content:center;font-family:Fredoka,sans-serif;font-weight:600;font-size:19px">3</div>
 <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:20px;line-height:1.2">Bayar lunas</div>
-<p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a4132">Admin membalas dengan kode QRIS untuk pembayaran.</p>
+<p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a4132">Scan QRIS di website, lalu kirim bukti bayar ke WhatsApp kami. Pesananmu otomatis tertulis di chat.</p>
 </div>
 <div style="background:#fff;border:2px solid #3b3819;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:10px">
 <div style="width:40px;height:40px;border-radius:999px;border:2px solid #3b3819;background:#cdf0de;display:flex;align-items:center;justify-content:center;font-family:Fredoka,sans-serif;font-weight:600;font-size:19px">4</div>
@@ -344,7 +344,7 @@
 <div style="background:#E8EDC4;border:2px solid #3b3819;border-radius:28px;padding:32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:28px">
 <div>
 <h1 style="margin:0 0 12px;font-family:Fredoka,sans-serif;font-weight:600;font-size:clamp(28px,3.6vw,40px);line-height:1.06">Pre-order lewat keranjang, konfirmasi di WhatsApp.</h1>
-<p style="margin:0 0 18px;font-size:16px;line-height:1.7;color:#3a3125">Isi keranjang dulu di katalog, tulis nama, lalu tekan kirim pre-order. Daftar produk, jumlah, dan totalnya otomatis tertulis di chat. Admin membalas dengan detail pembayaran; slime dibuat setelah pembayaran lunas.</p>
+<p style="margin:0 0 18px;font-size:16px;line-height:1.7;color:#3a3125">Isi keranjang dulu di katalog, tulis nama, lalu tekan Lanjut bayar dan bayar lewat QRIS. Setelah itu tekan Sudah bayar: daftar produk, jumlah, dan totalnya otomatis tertulis di chat, tinggal lampirkan bukti bayarnya. Slime dibuat setelah pembayaran dicek admin.</p>
 <a href="{{ waPlain }}" target="_blank" rel="noopener" style="display:inline-block;background:#3b3819;color:#FCF5E6;font-weight:800;font-size:15px;padding:15px 26px;border-radius:999px">Buka chat WhatsApp</a>
 </div>
 <div style="display:flex;flex-direction:column;gap:12px">
@@ -387,9 +387,11 @@
 <button onClick="{{ closeCart }}" style="position:absolute;inset:0;border:none;padding:0;cursor:pointer;background:rgba(34,28,20,.42);animation:fadeIn .34s ease"></button>
 <aside style="position:relative;width:min(420px,100%);height:100%;background:#FCF5E6;border-left:2px solid #3b3819;display:flex;flex-direction:column;animation:slideIn .42s cubic-bezier(.2,.7,.3,1)">
 <div style="padding:20px 22px;border-bottom:1.5px solid #e3dbb4;display:flex;justify-content:space-between;align-items:center">
-<div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:23px">Keranjang</div>
+<div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:23px">{{ drawerTitle }}</div>
 <button onClick="{{ closeCart }}" style="cursor:pointer;background:none;border:2px solid #3b3819;border-radius:999px;width:34px;height:34px;font-size:16px;font-weight:800;color:#3b3819">✕</button>
 </div>
+<sc-if value="{{ cartView }}" hint-placeholder-val="{{ true }}">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column">
 <div style="flex:1;overflow:auto;padding:18px 22px;display:flex;flex-direction:column;gap:14px">
 <sc-if value="{{ cartEmpty }}" hint-placeholder-val="{{ false }}">
 <div style="text-align:center;padding:40px 10px;color:#6b6047;font-size:15px;line-height:1.6">Keranjang masih kosong.<br>Pilih dulu di katalog, ya.</div>
@@ -429,13 +431,40 @@
 <div style="display:flex;align-items:center;gap:14px">
 <div style="flex:none;display:flex;flex-direction:column;line-height:1.15"><span style="font-size:12.5px;font-weight:700;color:#6b6047">Total · {{ cartCount }} item</span><span style="font-family:Fredoka,sans-serif;font-size:24px">{{ totalStr }}</span></div>
 <sc-if value="{{ poValid }}" hint-placeholder-val="{{ false }}">
-<a href="{{ waOrder }}" onClick="{{ sendPo }}" target="_blank" rel="noopener" style="flex:1;text-align:center;background:#B7D36A;border:2px solid #3b3819;color:#2d2b10;font-weight:800;font-size:15.5px;padding:14px 16px;border-radius:999px;white-space:nowrap" style-hover="background:#a6c456">Kirim pre-order</a>
+<button onClick="{{ goPay }}" style="flex:1;cursor:pointer;text-align:center;background:#B7D36A;border:2px solid #3b3819;color:#2d2b10;font-family:Nunito,sans-serif;font-weight:800;font-size:15.5px;padding:14px 16px;border-radius:999px;white-space:nowrap" style-hover="background:#a6c456">Lanjut bayar →</button>
 </sc-if>
 <sc-if value="{{ poInvalid }}" hint-placeholder-val="{{ true }}">
-<span style="flex:1;text-align:center;background:#f2ece0;border:2px solid #b3a58a;color:#6b6047;font-weight:800;font-size:15.5px;padding:14px 16px;border-radius:999px;cursor:not-allowed;white-space:nowrap">Kirim pre-order</span>
+<span style="flex:1;text-align:center;background:#f2ece0;border:2px solid #b3a58a;color:#6b6047;font-weight:800;font-size:15.5px;padding:14px 16px;border-radius:999px;cursor:not-allowed;white-space:nowrap">Lanjut bayar →</span>
 </sc-if>
 </div>
 </div>
+</div>
+</sc-if>
+<sc-if value="{{ payView }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column">
+<div style="flex:1;overflow:auto;padding:16px 22px;display:flex;flex-direction:column;gap:14px">
+<button onClick="{{ backToCart }}" style="align-self:flex-start;background:none;border:none;cursor:pointer;font-family:Nunito,sans-serif;font-size:14px;font-weight:800;color:#5f6b2c;padding:0">← Kembali ke keranjang</button>
+<div style="background:#3b3819;color:#FCF5E6;border-radius:18px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px">
+<span style="font-size:13px;font-weight:700;line-height:1.35">Total yang harus dibayar<span style="display:block;font-size:12px;font-weight:600;opacity:.8">{{ cartCount }} item · atas nama {{ poNameShow }}</span></span>
+<span style="font-family:Fredoka,sans-serif;font-size:28px;line-height:1;white-space:nowrap">{{ totalStr }}</span>
+</div>
+<div style="background:#fff;border:2px solid #3b3819;border-radius:20px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:10px">
+<img src="./qris.jpg" alt="Kode QRIS Slimoo" width="1129" height="1600" style="display:block;width:100%;max-width:280px;height:auto;border-radius:12px">
+<a href="./qris.jpg" download="QRIS-Slimoo.jpg" style="display:flex;align-items:center;gap:8px;border:2px solid #3b3819;border-radius:999px;padding:10px 18px;font-size:14px;font-weight:800;color:#3b3819;background:#E8EDC4"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"></path></svg>Simpan QRIS</a>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.45;color:#3b3819"><span style="flex:none;width:22px;height:22px;border-radius:999px;background:#3b3819;color:#FCF5E6;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px">1</span><span>Tekan <b>Simpan QRIS</b>. Kalau gambar terbuka di tab baru, tekan lama gambarnya lalu pilih <b>Simpan gambar</b>. Bisa juga langsung scan dari HP lain.</span></div>
+<div style="display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.45;color:#3b3819"><span style="flex:none;width:22px;height:22px;border-radius:999px;background:#3b3819;color:#FCF5E6;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px">2</span><span>Buka m-banking atau e-wallet, pilih <b>Scan / Bayar</b>, lalu pilih <b>gambar dari galeri</b>.</span></div>
+<div style="display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.45;color:#3b3819"><span style="flex:none;width:22px;height:22px;border-radius:999px;background:#3b3819;color:#FCF5E6;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px">3</span><span>Masukkan nominal persis <b>{{ totalStr }}</b>, lalu bayar.</span></div>
+<div style="display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.45;color:#3b3819"><span style="flex:none;width:22px;height:22px;border-radius:999px;background:#3b3819;color:#FCF5E6;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px">4</span><span><b>Screenshot</b> bukti pembayaran, lalu tekan tombol di bawah dan lampirkan screenshot-nya di chat WhatsApp.</span></div>
+</div>
+</div>
+<div style="padding:14px 22px calc(16px + env(safe-area-inset-bottom));border-top:1.5px solid #e3dbb4;display:flex;flex-direction:column;gap:8px;background:#FCF5E6">
+<a href="{{ waPaid }}" onClick="{{ sendPo }}" target="_blank" rel="noopener" style="text-align:center;background:#B7D36A;border:2px solid #3b3819;color:#2d2b10;font-weight:800;font-size:15.5px;padding:14px 16px;border-radius:999px" style-hover="background:#a6c456">Sudah bayar, kirim bukti ke WhatsApp</a>
+<span style="text-align:center;font-size:12.5px;font-weight:700;color:#6b6047">Jangan lupa lampirkan screenshot bukti bayar di chat.</span>
+</div>
+</div>
+</sc-if>
 </aside>
 </div>
 </sc-if>
@@ -461,8 +490,8 @@ const TIPS = [
   ['5','Jauhkan dari rambut dan kain','Slime yang menempel di rambut atau kain susah dilepas. Mainkan di atas meja, bukan di sofa, karpet, atau dekat rambut.']
 ];
 const FAQS = [
-  ['Bagaimana cara pre-order?','Pilih produk dan masukkan ke keranjang, isi nama, lalu tekan kirim pre-order. Pesananmu otomatis tertulis di chat WhatsApp kami. Setelah pembayaran lunas, slime dibuat dan semua pesanan bisa diambil di Meja 7, Lantai 3 Wings A, Binus Bekasi pada 24 November 2026, pukul 09.00–12.00 WIB.'],
-  ['Pembayarannya lewat apa?','Lewat QRIS, lunas di awal. QRIS bisa dibayar dari m-banking atau e-wallet apa pun (GoPay, OVO, DANA, ShopeePay, dll). Kode QRIS dikirim admin setelah pesanan dikonfirmasi di WhatsApp.'],
+  ['Bagaimana cara pre-order?','Pilih produk dan masukkan ke keranjang, isi nama, lalu tekan Lanjut bayar. Bayar lewat QRIS yang muncul, lalu tekan Sudah bayar untuk mengirim pesanan dan bukti bayar ke WhatsApp kami. Setelah pembayaran dicek admin, slime dibuat dan semua pesanan bisa diambil di Meja 7, Lantai 3 Wings A, Binus Bekasi pada 24 November 2026, pukul 09.00–12.00 WIB.'],
+  ['Pembayarannya lewat apa?','Lewat QRIS, lunas di awal. QRIS bisa dibayar dari m-banking atau e-wallet apa pun (GoPay, OVO, DANA, ShopeePay, dll). Kode QRIS muncul di website setelah kamu menekan Lanjut bayar di keranjang.'],
   ['Slime-nya aman untuk anak?','Bahannya food-grade non-toxic, tapi tetap bukan makanan. Untuk anak di bawah 6 tahun sebaiknya dimainkan dengan pengawasan.'],
   ['Bisa dikirim ke rumah?','Tidak. Slimoo khusus pembelian di lingkungan kampus, tanpa pengiriman ke luar kota. Pesanan diambil langsung di Meja 7, Lantai 3 Wings A, Binus Bekasi.']
 ];
@@ -516,7 +545,7 @@ class Component extends DCLogic {
       const st = e.state;
       if (!st || !st.slimoo) return;
       this._depth = Math.max(0, (this._depth || 0) - 1);
-      if (this.state.cartOpen || this.state.menuOpen) this.setState({ cartOpen:false, menuOpen:false });
+      if (this.state.cartOpen || this.state.menuOpen) this.setState({ cartOpen:false, payStep:false, menuOpen:false });
       this.go(st.page || 'home', st.pid, true);
       if (st.prev) this.setState({ prev:st.prev });
     };
@@ -582,9 +611,9 @@ class Component extends DCLogic {
   // (di browser maupun tombol back HP) kembali ke halaman sebelumnya, bukan keluar dari situs.
   go(page, pid, fromHistory){
     const s0 = this.state;
-    if (page === s0.page && (pid ?? null) === s0.pid) { this.setState({ cartOpen:false, menuOpen:false }); window.scrollTo(0,0); return; }
+    if (page === s0.page && (pid ?? null) === s0.pid) { this.setState({ cartOpen:false, menuOpen:false, payStep:false }); window.scrollTo(0,0); return; }
     const prev = page === 'produk' && s0.page !== 'produk' ? s0.page : (page === 'produk' ? s0.prev : null);
-    this.setState(s => ({ page, pid: pid ?? null, prev: page === 'produk' ? (prev || 'katalog') : null, photo:1, cartOpen:false, menuOpen:false, nav:(s.nav||0) + 1 }));
+    this.setState(s => ({ page, pid: pid ?? null, prev: page === 'produk' ? (prev || 'katalog') : null, photo:1, cartOpen:false, payStep:false, menuOpen:false, nav:(s.nav||0) + 1 }));
     if (!fromHistory) {
       try { window.history.pushState({ slimoo:1, page, pid: pid ?? null, prev: page === 'produk' ? (prev || 'katalog') : null }, ''); this._depth = (this._depth || 0) + 1; } catch (e) {}
     }
@@ -690,6 +719,7 @@ class Component extends DCLogic {
     const pickupWhen = this.props.pickupWhen ?? 'Selasa, 24 November 2026, pukul 09.00–12.00 WIB';
     const poName = (s.poName || '').trim();
     const poValid = count > 0 && poName.length >= 2;
+    const payStep = !!s.payStep && poValid;
     const orderText = ['PRE-ORDER SLIMOO', '',
          'Nama: ' + poName, '',
          'Pesanan:',
@@ -699,6 +729,9 @@ class Component extends DCLogic {
          'Tempat ambil: ' + pickupSpot,
          'Waktu ambil: ' + pickupWhen, '',
          'Mohon dikirim detail pembayarannya ya. Terima kasih!'].join('\n');
+    const paidText = orderText
+      .replace('Pembayaran: lunas di awal via QRIS', 'Pembayaran: SUDAH DIBAYAR via QRIS (' + this.rp(total) + ')')
+      .replace('Mohon dikirim detail pembayarannya ya. Terima kasih!', 'Bukti pembayaran saya lampirkan di chat ini. Terima kasih!');
     const chip = (on) => 'cursor:pointer;border:1.5px solid #3b3819;border-radius:999px;padding:9px 16px;font-family:Nunito,sans-serif;font-size:13.5px;font-weight:800;' +
       (on ? 'background:#3b3819;color:#FCF5E6' : 'background:#fff;color:#4a4132');
 
@@ -752,7 +785,7 @@ class Component extends DCLogic {
       tips:TIPS.map(([no,title,body]) => ({ no, title, body })),
       faqs:FAQS.map(([q2,a],i) => ({ q:q2, a, open:s.faq === i, sign:s.faq === i ? '−' : '+',
         toggle:() => this.setState(x => ({ faq: x.faq === i ? -1 : i })) })),
-      cartOpen:s.cartOpen, openCart:() => this.setState({ cartOpen:true, menuOpen:false }), closeCart:() => this.setState({ cartOpen:false }),
+      cartOpen:s.cartOpen, openCart:() => this.setState({ cartOpen:true, menuOpen:false }), closeCart:() => this.setState({ cartOpen:false, payStep:false }),
       lines, cartEmpty:count === 0, cartFilled:count > 0, cartCount:count, totalStr:this.rp(total),
       goBack:() => this.goBack(), backLabel:({ home:'Kembali ke beranda', katalog:'Kembali ke katalog', kuis:'Kembali ke hasil kuis', perawatan:'Kembali ke cara merawat', faq:'Kembali ke FAQ', kontak:'Kembali ke kontak' })[s.prev || 'katalog'] || 'Kembali',
       wide:!s.narrow, menuOpen:!!s.menuOpen && s.narrow,
@@ -771,7 +804,10 @@ class Component extends DCLogic {
       undoOpen: !!s.undo, undoLabel: s.undo ? s.undo.name + ' dihapus' : '', undo:() => this.undoRemove(),
       badgeStyle:'display:inline-block;background:#B7D36A;border-radius:999px;min-width:22px;padding:1px 7px;font-size:12.5px;text-align:center' +
         (s.bump ? ';animation:' + (s.bump % 2 ? 'pulseA' : 'pulseB') + ' .58s cubic-bezier(.3,1.4,.5,1)' : ''),
-      waOrder:this.waHref(orderText), poValid, poInvalid:!poValid,
+      waOrder:this.waHref(orderText), waPaid:this.waHref(paidText), poValid, poInvalid:!poValid,
+      payView:payStep, cartView:!payStep, drawerTitle:payStep ? 'Pembayaran' : 'Keranjang', poNameShow:poName,
+      goPay:() => { if (poValid) { this.setState({ payStep:true }); this.squish('pop'); } },
+      backToCart:() => this.setState({ payStep:false }),
       poName:s.poName || '',
       setPoName:(e) => { const v = e.target.value; this.setState({ poName:v }); this.savePo({ poName:v }); },
       poHint: count === 0 ? 'Keranjang masih kosong.' : 'Isi nama dulu, ya.',
