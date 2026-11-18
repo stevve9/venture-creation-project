@@ -88,7 +88,7 @@
 <div>
 <section style="max-width:1140px;margin:0 auto;padding:38px 22px 46px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px;align-items:center">
 <div style="display:flex;flex-direction:column;gap:20px;min-width:0">
-<div style="align-self:flex-start;max-width:100%;line-height:1.4;white-space:nowrap;background:#E8EDC4;color:#4a5420;font-size:12.5px;font-weight:800;padding:7px 14px;border-radius:999px;border:1.5px solid #3b3819">Handmade · khusus pembelian di kampus</div>
+<div style="{{ poBadgeStyle }}">{{ poBadge }}</div>
 <h1 style="margin:0;font-family:Fredoka,sans-serif;font-weight:600;font-size:clamp(38px,5.4vw,62px);line-height:1.02;letter-spacing:-.02em;text-wrap:pretty">Slime yang bikin kamu gak mau berhenti.</h1>
 <p style="margin:0;font-size:16.5px;line-height:1.65;color:#4a4132;max-width:420px">Leci, stroberi, coklat, bubblegum, mangga. Semua diaduk sendiri, dites dulu, baru diserahkan langsung di kampus.</p>
 <div style="display:flex;gap:12px;flex-wrap:wrap">
@@ -424,7 +424,8 @@
 <div style="display:grid;grid-template-columns:auto 1fr;column-gap:12px;row-gap:5px;font-size:13px;line-height:1.35;background:#fff;border:1.5px solid #e3dbb4;border-radius:14px;padding:10px 12px">
 <span style="font-weight:800;color:#7a7052;font-size:11px;letter-spacing:.07em;text-transform:uppercase;padding-top:1px">Bayar</span><span style="font-weight:700;color:#3b3819">QRIS <span style="font-weight:600;color:#6b6047">· m-banking / e-wallet apa pun</span></span>
 <span style="font-weight:800;color:#7a7052;font-size:11px;letter-spacing:.07em;text-transform:uppercase;padding-top:1px">Tempat</span><span style="font-weight:700;color:#3b3819">{{ pickupSpot }}</span>
-<span style="font-weight:800;color:#7a7052;font-size:11px;letter-spacing:.07em;text-transform:uppercase;padding-top:1px">Waktu</span><span style="font-weight:700;color:#3b3819">{{ pickupWhen }}</span>
+<span style="font-weight:800;color:#7a7052;font-size:11px;letter-spacing:.07em;text-transform:uppercase;padding-top:1px">PO</span><span style="font-weight:700;color:#3b3819">{{ poPeriod }}</span>
+<span style="font-weight:800;color:#7a7052;font-size:11px;letter-spacing:.07em;text-transform:uppercase;padding-top:1px">Ambil</span><span style="font-weight:700;color:#3b3819">{{ pickupWhen }}</span>
 </div>
 <label style="display:flex;flex-direction:column;gap:5px;font-size:12.5px;font-weight:800;color:#3a3125"><span style="display:flex;justify-content:space-between;gap:10px">Nama<sc-if value="{{ poInvalid }}" hint-placeholder-val="{{ true }}"><span style="font-weight:700;color:#8a2d5c">{{ poHint }}</span></sc-if></span>
 <input value="{{ poName }}" onChange="{{ setPoName }}" placeholder="Nama kamu" autoComplete="name" style="width:100%;box-sizing:border-box;background:#fff;border:2px solid #3b3819;border-radius:14px;padding:11px 14px;font-family:Nunito,sans-serif;font-size:16px;font-weight:700;color:#3b3819;outline:none" style-focus="border-color:#8db33a;box-shadow:0 0 0 3px #E8EDC4"></input></label>
@@ -501,7 +502,7 @@ const TIPS = [
   ['5','Jauhkan dari rambut dan kain','Slime yang menempel di rambut atau kain susah dilepas. Mainkan di atas meja, bukan di sofa, karpet, atau dekat rambut.']
 ];
 const FAQS = [
-  ['Bagaimana cara pre-order?','Pilih produk dan masukkan ke keranjang, isi nama, lalu tekan Lanjut bayar. Bayar lewat QRIS yang muncul, lalu tekan Sudah bayar untuk mengirim pesanan dan bukti bayar ke WhatsApp kami. Setelah pembayaran dicek admin, slime dibuat dan semua pesanan bisa diambil di Meja 7, Lantai 3 Wings A, Binus Bekasi pada 24 November 2026, pukul 09.00–12.00 WIB.'],
+  ['Bagaimana cara pre-order?','Pre-order dibuka 18–22 November 2026 (sampai pukul 23.59 WIB). Pilih produk dan masukkan ke keranjang, isi nama, lalu tekan Lanjut bayar. Bayar lewat QRIS yang muncul, lalu tekan Sudah bayar untuk mengirim pesanan dan bukti bayar ke WhatsApp kami. Setelah pembayaran dicek admin, slime dibuat dan semua pesanan bisa diambil di Meja 7, Lantai 3 Wings A, Binus Bekasi pada 24 November 2026, pukul 09.00–12.00 WIB.'],
   ['Pembayarannya lewat apa?','Lewat QRIS, lunas di awal. QRIS bisa dibayar dari m-banking atau e-wallet apa pun (GoPay, OVO, DANA, ShopeePay, dll). Kode QRIS muncul di website setelah kamu menekan Lanjut bayar di keranjang.'],
   ['Slime-nya aman untuk anak?','Bahannya food-grade non-toxic, tapi tetap bukan makanan. Untuk anak di bawah 6 tahun sebaiknya dimainkan dengan pengawasan.'],
   ['Bisa dikirim ke rumah?','Tidak. Slimoo khusus pembelian di lingkungan kampus, tanpa pengiriman ke luar kota. Pesanan diambil langsung di Meja 7, Lantai 3 Wings A, Binus Bekasi.']
@@ -542,6 +543,10 @@ const CART_KEY = 'slimu-cart-v1';
 const SFX_KEY = 'slimu-sfx-v1';
 // Foto produk: taruh di folder images/ dengan nama <id>-1.jpg dan <id>-2.jpg (mis. images/leci-1.jpg).
 // Kalau file belum ada, otomatis tampil pola warna (tile) produk.
+// Periode pre-order (WIB). Ganti tanggal ini untuk batch berikutnya.
+const PO_OPEN  = Date.UTC(2026, 10, 18, 0 - 7, 0, 0);    // 18 Nov 2026 00.00 WIB
+const PO_CLOSE = Date.UTC(2026, 10, 22, 23 - 7, 59, 59); // 22 Nov 2026 23.59 WIB
+const PO_LABEL = '18–22 November 2026';
 const PHOTO_DIR = './images/';
 const PHOTO_EXT = '.jpg';
 const photoBg = (p, n) => "url('" + PHOTO_DIR + p.id + '-' + n + PHOTO_EXT + "') center/cover no-repeat, " + p.tile;
@@ -729,7 +734,10 @@ class Component extends DCLogic {
     const pickupSpot = this.props.pickupSpot ?? 'Meja 7, Lantai 3 Wings A, Binus Bekasi';
     const pickupWhen = this.props.pickupWhen ?? 'Selasa, 24 November 2026, pukul 09.00–12.00 WIB';
     const poName = (s.poName || '').trim();
-    const poValid = count > 0 && poName.length >= 2;
+    const now = Date.now();
+    const poNotYet = now < PO_OPEN, poClosed = now > PO_CLOSE, poIsOpen = !poNotYet && !poClosed;
+    const daysLeft = Math.ceil((PO_CLOSE - now) / 864e5);
+    const poValid = poIsOpen && count > 0 && poName.length >= 2;
     const payStep = !!s.payStep && poValid;
     const orderText = ['PRE-ORDER SLIMOO', '',
          'Nama: ' + poName, '',
@@ -737,6 +745,7 @@ class Component extends DCLogic {
          ...ids.map((id,i) => { const p = PRODUCTS.find(x => x.id === id); return (i+1) + '. ' + p.name + ' — ' + s.cart[id] + ' pcs × ' + this.rp(p.price) + ' = ' + this.rp(p.price*s.cart[id]); }),
          '', 'Total: ' + this.rp(total) + ' (tanpa ongkir)',
          'Pembayaran: lunas di awal via QRIS',
+         'Periode PO: ' + PO_LABEL,
          'Tempat ambil: ' + pickupSpot,
          'Waktu ambil: ' + pickupWhen, '',
          'Mohon dikirim detail pembayarannya ya. Terima kasih!'].join('\n');
@@ -821,7 +830,11 @@ class Component extends DCLogic {
       backToCart:() => this.setState({ payStep:false }),
       poName:s.poName || '',
       setPoName:(e) => { const v = e.target.value; this.setState({ poName:v }); this.savePo({ poName:v }); },
-      poHint: count === 0 ? 'Keranjang masih kosong.' : 'Isi nama dulu, ya.',
+      poHint: poClosed ? 'Pre-order sudah ditutup.' : poNotYet ? 'Pre-order belum dibuka.' : count === 0 ? 'Keranjang masih kosong.' : 'Isi nama dulu, ya.',
+      poPeriod:PO_LABEL,
+      poBadge: poClosed ? 'Pre-order batch ini sudah ditutup' : poNotYet ? 'Pre-order dibuka ' + PO_LABEL
+        : daysLeft <= 1 ? 'Hari terakhir pre-order · tutup 22 Nov, 23.59 WIB' : 'Pre-order dibuka sampai 22 Nov · sisa ' + daysLeft + ' hari',
+      poBadgeStyle:'align-self:flex-start;max-width:100%;line-height:1.4;background:' + (poClosed ? '#f2ece0;color:#6b6047' : daysLeft <= 1 ? '#ffd8e8;color:#8a2d5c' : '#E8EDC4;color:#4a5420') + ';font-size:12.5px;font-weight:800;padding:7px 14px;border-radius:999px;border:1.5px solid #3b3819',
       pickupWhen, pickupSpot,
       sendPo:() => this.squish('squish'), waPlain:this.waHref('Halo Slimoo! Saya mau tanya-tanya soal slime dulu.'),
       waDisplay:('0' + this.wa().slice(2)).replace(/^(\d{4})(\d{4})(\d+)$/, '$1-$2-$3')
