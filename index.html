@@ -244,16 +244,16 @@
 <div style="animation:faqIn .4s ease">
 <div style="background:#E8EDC4;border:2px solid #3b3819;border-radius:28px;padding:26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:24px;align-items:center">
 <div style="min-width:0">
-<div style="font-size:13px;font-weight:800;color:#4a5420;margin-bottom:8px">Cocoknya buat kamu</div>
-<h2 style="margin:0 0 6px;font-family:Fredoka,sans-serif;font-weight:600;font-size:32px;line-height:1.1">{{ quizResultName }}</h2>
-<div style="font-size:15px;font-weight:800;color:#4a5420;margin-bottom:12px">{{ quizResultCat }}</div>
+<div style="font-size:13px;font-weight:800;color:#4a5420;margin-bottom:8px">Kamu tuh…</div>
+<h2 style="margin:0 0 8px;font-family:Fredoka,sans-serif;font-weight:600;font-size:34px;line-height:1.1">{{ quizResultTitle }}</h2>
+<div style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1.5px solid #3b3819;border-radius:999px;padding:6px 14px;font-size:15px;font-weight:800;color:#3b3819;margin-bottom:12px">Aroma kamu: {{ quizResultName }}</div>
 <p style="margin:0 0 18px;font-size:15.5px;line-height:1.65;color:#3a3125">{{ quizResultWhy }}</p>
 <div style="display:flex;gap:12px;flex-wrap:wrap">
 <button onClick="{{ quizResultOpen }}" style="cursor:pointer;background:#3b3819;border:2px solid #3b3819;color:#FCF5E6;font-weight:800;font-size:15px;padding:15px 24px;border-radius:999px">Lihat produknya</button>
 <button onClick="{{ quizResultAdd }}" style="cursor:pointer;background:#B7D36A;border:2px solid #3b3819;color:#2d2b10;font-weight:800;font-size:15px;padding:15px 24px;border-radius:999px">+ Keranjang · {{ quizResultPrice }}</button>
 </div>
 </div>
-<div style="aspect-ratio:1/1;border:2px solid #3b3819;border-radius:26px;background:{{ quizResultTile }}"></div>
+<div style="position:relative;aspect-ratio:1/1;border:2px solid #3b3819;border-radius:26px;background:{{ quizResultTile }}"><span aria-hidden="true" style="position:absolute;right:14px;bottom:10px;font-size:64px;line-height:1;filter:drop-shadow(0 3px 0 rgba(59,56,25,.18))">{{ quizResultIcon }}</span></div>
 </div>
 <button onClick="{{ quizReset }}" style="margin-top:20px;cursor:pointer;background:none;border:none;padding:0;font-size:14px;font-weight:800;color:#5f6b2c">Ulangi kuis</button>
 </div>
@@ -518,26 +518,30 @@ const GARANSI = [
   ['2','Kirim ke WhatsApp','Sertakan nama pemesan. Admin memeriksa dan membalas di hari yang sama selama jam kerja.'],
   ['3','Ganti atau uang kembali','Slime yang bocor, kering, atau salah varian kami ganti dengan produk baru. Kalau stoknya habis, dana dikembalikan penuh.']
 ];
+const ICON = { leci:'🍈', stroberi:'🍓', coklat:'🍫', mangga:'🥭', bubblegum:'🫧' };
 const QUIZ = [
-  ['Aroma apa yang paling bikin kamu betah?', [
-    ['Segar dan manis ringan','leci'], ['Buah manis dan susu','stroberi'], ['Manis hangat seperti dessert','coklat'],
-    ['Permen yang ceria','bubblegum'], ['Buah tropis yang cerah','mangga']
+  ['Warna favoritmu?', [
+    ['💗 Pink','stroberi'], ['💜 Ungu / pastel','bubblegum'], ['🤍 Putih / bening','leci'],
+    ['💛 Kuning / oranye','mangga'], ['🤎 Cokelat / krem','coklat']
   ]],
-  ['Suasana apa yang kamu suka?', [
-    ['Tenang dan adem','leci'], ['Manis dan lembut','stroberi'], ['Santai seperti ngopi sore','coklat'],
-    ['Ceria dan ramai','bubblegum'], ['Cerah dan hangat','mangga']
+  ['Hari libur idealmu?', [
+    ['🎀 Dandan & foto-foto lucu','stroberi'], ['🎡 Main ke tempat ramai bareng teman','bubblegum'], ['🎧 Dengar musik santai di kamar','leci'],
+    ['🌳 Piknik di taman','mangga'], ['🛋️ Rebahan sambil nonton','coklat']
   ]],
-  ['Cemilan favoritmu?', [
-    ['Es leci atau jelly','leci'], ['Es krim atau yogurt stroberi','stroberi'], ['Brownies atau coklat batangan','coklat'],
-    ['Permen karet atau permen warna-warni','bubblegum'], ['Mangga segar atau es mangga','mangga']
+  ['Kalau jadi hewan lucu, kamu…', [
+    ['🐰 Kelinci imut','stroberi'], ['🦄 Unicorn heboh','bubblegum'], ['🐱 Kucing kalem','leci'],
+    ['🐤 Anak ayam ceria','mangga'], ['🐻 Beruang santai','coklat']
   ]]
 ];
+const TITLE = {
+  leci:'Si Kalem Segar', stroberi:'Si Manis Imut', coklat:'Si Santai Hangat', bubblegum:'Si Paling Heboh', mangga:'Si Ceria Cerah'
+};
 const WHY = {
-  leci:'Kamu suka yang segar dan ringan. Slime Leci punya aroma manis yang adem, cocok dimainkan kapan saja.',
-  stroberi:'Kamu suka yang manis dan lembut. Slime Stroberi punya aroma buah klasik yang ceria dan menyenangkan.',
-  coklat:'Kamu cenderung ke yang manis dan hangat. Slime Coklat cocok buat teman santai sambil belajar atau nonton.',
-  bubblegum:'Kamu suka yang ceria dan penuh warna. Aroma permen karet Slime Bubblegum bikin suasana langsung semangat.',
-  mangga:'Kamu suka yang cerah dan segar. Slime Mangga punya aroma tropis yang manis tapi tidak berlebihan.'
+  leci:'Kamu kalem dan suka suasana adem. Slime Leci punya aroma segar yang manis ringan, pas buat menemani waktu santai.',
+  stroberi:'Kamu manis dan suka hal-hal imut. Slime Stroberi punya aroma buah yang ceria, cocok buat kamu yang suka tampil lucu.',
+  coklat:'Kamu santai dan nyaman di mana saja. Slime Coklat punya aroma manis yang hangat, teman pas buat rebahan atau nonton.',
+  bubblegum:'Kamu heboh dan selalu bikin suasana ramai. Aroma permen karet Slime Bubblegum seceria kamu!',
+  mangga:'Kamu ceria dan penuh semangat. Slime Mangga punya aroma tropis yang cerah, bikin mood langsung naik.'
 };
 const CART_KEY = 'slimu-cart-v1';
 const SFX_KEY = 'slimu-sfx-v1';
@@ -799,8 +803,9 @@ class Component extends DCLogic {
       quizQ:qz[0],
       quizOpts:qz[1].map(([label, cat]) => ({ label, pick:() => this.answer(cat) })),
       quizReset:() => this.setState({ quiz:[] }),
-      quizResultName:rec.name, quizResultCat:rec.aroma, quizResultWhy:WHY[winner],
-      quizResultTile:rec.tile, quizResultPrice:this.rp(rec.price),
+      quizResultName:ICON[rec.cat] + ' ' + rec.name, quizResultCat:rec.aroma, quizResultWhy:WHY[rec.cat],
+      quizResultTitle:TITLE[rec.cat] + ' ' + ICON[rec.cat], quizResultIcon:ICON[rec.cat],
+      quizResultTile:photoBg(rec, 1), quizResultPrice:this.rp(rec.price),
       quizResultOpen:() => this.go('produk', rec.id), quizResultAdd:() => this.add(rec.id),
       tips:TIPS.map(([no,title,body]) => ({ no, title, body })),
       faqs:FAQS.map(([q2,a],i) => ({ q:q2, a, open:s.faq === i, sign:s.faq === i ? '−' : '+',
