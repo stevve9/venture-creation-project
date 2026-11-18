@@ -385,16 +385,6 @@
 </div>
 </div>
 </sc-for>
-<sc-if value="{{ cartFilled }}" hint-placeholder-val="{{ true }}">
-<div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
-<div style="font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#7a7052">Info pembayaran &amp; pengambilan</div>
-<div style="background:#fff;border:1.5px dashed #c9bf9e;border-radius:16px;padding:12px 14px;display:grid;grid-template-columns:62px 1fr;row-gap:10px;column-gap:10px">
-<span style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#7a7052;padding-top:2px">Bayar</span><span style="font-size:13.5px;font-weight:700;color:#3b3819;line-height:1.45">QRIS, lunas di awal<span style="display:block;font-size:12.5px;font-weight:600;color:#6b6047">Bisa dari m-banking atau e-wallet apa pun</span></span>
-<span style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#7a7052;padding-top:2px">Tempat</span><span style="font-size:13.5px;font-weight:700;color:#3b3819;line-height:1.45">{{ pickupSpot }}<span style="display:block;font-size:12.5px;font-weight:600;color:#6b6047">Ambil sendiri, tanpa ongkir</span></span>
-<span style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#7a7052;padding-top:2px">Waktu</span><span style="font-size:13.5px;font-weight:700;color:#3b3819;line-height:1.45">{{ pickupWhen }}</span>
-</div>
-</div>
-</sc-if>
 </div>
 <sc-if value="{{ undoOpen }}" hint-placeholder-val="{{ false }}">
 <div style="margin:0 22px 4px;background:#3b3819;color:#FCF5E6;border-radius:16px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;animation:faqIn .34s ease">
@@ -405,7 +395,12 @@
 <sc-if value="{{ stockMsgOpen }}" hint-placeholder-val="{{ false }}">
 <div role="status" style="margin:0 22px 4px;background:#ffd8e8;color:#8a2d5c;border:1.5px solid #3b3819;border-radius:16px;padding:12px 14px;font-size:13.5px;font-weight:800;line-height:1.35;animation:faqIn .34s ease">{{ stockMsg }}</div>
 </sc-if>
-<div style="padding:14px 22px calc(16px + env(safe-area-inset-bottom));border-top:1.5px solid #e3dbb4;display:flex;flex-direction:column;gap:12px;background:#FCF5E6">
+<div style="padding:14px 22px calc(16px + env(safe-area-inset-bottom));border-top:1.5px solid #e3dbb4;display:flex;flex-direction:column;gap:10px;background:#FCF5E6">
+<div style="display:grid;grid-template-columns:auto 1fr;column-gap:12px;row-gap:5px;font-size:13px;line-height:1.35;background:#fff;border:1.5px solid #e3dbb4;border-radius:14px;padding:10px 12px">
+<span style="font-weight:800;color:#7a7052;font-size:11px;letter-spacing:.07em;text-transform:uppercase;padding-top:1px">Bayar</span><span style="font-weight:700;color:#3b3819">QRIS <span style="font-weight:600;color:#6b6047">· m-banking / e-wallet apa pun</span></span>
+<span style="font-weight:800;color:#7a7052;font-size:11px;letter-spacing:.07em;text-transform:uppercase;padding-top:1px">Tempat</span><span style="font-weight:700;color:#3b3819">{{ pickupSpot }}</span>
+<span style="font-weight:800;color:#7a7052;font-size:11px;letter-spacing:.07em;text-transform:uppercase;padding-top:1px">Waktu</span><span style="font-weight:700;color:#3b3819">{{ pickupWhen }}</span>
+</div>
 <label style="display:flex;flex-direction:column;gap:5px;font-size:12.5px;font-weight:800;color:#3a3125"><span style="display:flex;justify-content:space-between;gap:10px">Nama<sc-if value="{{ poInvalid }}" hint-placeholder-val="{{ true }}"><span style="font-weight:700;color:#8a2d5c">{{ poHint }}</span></sc-if></span>
 <input value="{{ poName }}" onChange="{{ setPoName }}" placeholder="Nama kamu" autoComplete="name" style="width:100%;box-sizing:border-box;background:#fff;border:2px solid #3b3819;border-radius:14px;padding:11px 14px;font-family:Nunito,sans-serif;font-size:16px;font-weight:700;color:#3b3819;outline:none" style-focus="border-color:#8db33a;box-shadow:0 0 0 3px #E8EDC4"></input></label>
 <div style="display:flex;align-items:center;gap:14px">
